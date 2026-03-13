@@ -8,7 +8,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { format } from "date-fns";
-import ReactMarkdown from "react-markdown";
 
 const categories = [
   { value: "talent_strategy", label: "Talent Strategy", color: "#B82E2B" },

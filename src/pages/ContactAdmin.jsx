@@ -4,9 +4,8 @@ import { localLeadStorage } from "@/api/localLeadStorage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
-import { Loader2, User, Building, Phone, Mail, CalendarDays, Download } from "lucide-react";
+import { Loader2, User, Building, Mail, CalendarDays, Download } from "lucide-react";
 import { motion } from "framer-motion";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
