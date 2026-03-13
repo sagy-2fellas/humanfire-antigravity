@@ -26,7 +26,7 @@ export default function AdminDashboard() {
       title: "Contact Leads",
       description: "View demo requests and contact submissions",
       icon: Users,
-      link: createPageUrl("AdminDashboard"), // You can create this later
+      link: createPageUrl("ContactAdmin"),
       color: "bg-green-600"
     },
     {

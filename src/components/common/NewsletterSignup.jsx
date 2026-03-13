@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { localLeadStorage } from "@/api/localLeadStorage";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CheckCircle, Send } from "lucide-react";
@@ -17,7 +17,7 @@ export default function NewsletterSignup() {
 
     setIsSubmitting(true);
     try {
-      await base44.entities.Newsletter.create({
+      await localLeadStorage.addNewsletterSub({
         email
       });
       setIsSuccess(true);

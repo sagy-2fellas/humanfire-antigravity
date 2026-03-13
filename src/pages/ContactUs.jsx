@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { localLeadStorage } from "@/api/localLeadStorage";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -33,53 +33,13 @@ export default function ContactUs() {
     setIsSubmitting(true);
 
     try {
-      // Create contact record
-      const contact = await base44.entities.Contact.create({
-        ...formData,
-        source: "demo_request",
-        status: "new"
+      // Create contact record locally
+      const contact = await localLeadStorage.addContactLead({
+        ...formData
       });
 
-      // Send email notification with HTML template
-      await base44.integrations.Core.SendEmail({
-        to: "selma@humanfire.co.za", // Changed email address here
-        subject: `New Contact Form Submission from ${formData.first_name} ${formData.last_name}`,
-        body: `
-<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px; background-color: #fff;">
-  <h2 style="color: #E67A00; font-size: 20px; margin-bottom: 20px; font-weight: 600;">New Contact Form Submission</h2>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">NAME:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #E67A00; margin-bottom: 20px; margin-top: 5px;">${formData.first_name} ${formData.last_name}</p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">EMAIL:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #E67A00; margin-bottom: 20px; margin-top: 5px;"><a href="mailto:${formData.email}" style="color: #007bff; text-decoration: none;">${formData.email}</a></p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">PHONE:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #E67A00; margin-bottom: 20px; margin-top: 5px;">${formData.phone || 'Not provided'}</p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">COMPANY:</p>
-  <p style="background-color: #f8f9f8; padding: 12px; border-left: 3px solid #E67A00; margin-bottom: 20px; margin-top: 5px;">${formData.company}</p>
-  
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">POSITION:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #E67A00; margin-bottom: 20px; margin-top: 5px;">${formData.position}</p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">COMPANY SIZE:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #E67A00; margin-bottom: 20px; margin-top: 5px;">${formData.company_size || 'Not specified'}</p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">PRIMARY INTEREST:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #E67A00; margin-bottom: 20px; margin-top: 5px;">${formData.interest || 'Not specified'}</p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">MESSAGE:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #E67A00; margin-bottom: 20px; margin-top: 5px; white-space: pre-wrap;">${formData.message || 'No message provided'}</p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">SOURCE PAGE:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #E67A00; margin-bottom: 20px; margin-top: 5px;">Contact Form</p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">SUBMITTED AT:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #E67A00; margin-top: 5px;">${new Date().toLocaleString()}</p>
-</div>
-        `
-      });
+      // Simulating successful email send (backend-less)
+      console.log("Locally saved contact lead:", contact);
 
       setIsSuccess(true);
     } catch (error) {

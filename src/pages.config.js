@@ -53,6 +53,7 @@ import Blog from './pages/Blog';
 import BlogAdmin from './pages/BlogAdmin';
 import BlogEditor from './pages/BlogEditor';
 import BlogPost from './pages/BlogPost';
+import ContactAdmin from './pages/ContactAdmin';
 import ContactUs from './pages/ContactUs';
 import ForgotPassword from './pages/ForgotPassword';
 import Home from './pages/Home';
@@ -79,6 +80,7 @@ export const PAGES = {
     "BlogAdmin": BlogAdmin,
     "BlogEditor": BlogEditor,
     "BlogPost": BlogPost,
+    "ContactAdmin": ContactAdmin,
     "ContactUs": ContactUs,
     "ForgotPassword": ForgotPassword,
     "Home": Home,

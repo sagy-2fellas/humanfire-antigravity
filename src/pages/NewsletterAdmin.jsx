@@ -1,11 +1,12 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { base44 } from "@/api/base44Client";
+import { localLeadStorage } from "@/api/localLeadStorage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
-import { Loader2, Mail, Building, User, CalendarDays } from "lucide-react";
+import { Loader2, Mail, Building, User, CalendarDays, Download } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -16,7 +17,7 @@ export default function NewsletterAdmin() {
 
   const { data: newsletters, isLoading, isError, error } = useQuery({
     queryKey: ["newsletter-subscriptions"],
-    queryFn: () => base44.entities.Newsletter.list("-created_date"),
+    queryFn: () => localLeadStorage.getNewsletterSubs(),
     initialData: [],
   });
 
@@ -78,6 +79,14 @@ export default function NewsletterAdmin() {
                 />
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               </div>
+              <Button 
+                onClick={() => localLeadStorage.exportToCSV(filteredNewsletters, 'newsletter_subscribers')}
+                className="bg-green-600 hover:bg-green-700 text-white"
+                disabled={filteredNewsletters.length === 0}
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Export CSV
+              </Button>
             </div>
           </CardHeader>
           <CardContent>
