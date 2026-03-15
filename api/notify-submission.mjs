@@ -1,9 +1,9 @@
-const { Resend } = require('resend');
+import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'sagy@2fellasmedia.com';
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -66,4 +66,4 @@ module.exports = async function handler(req, res) {
     console.error('Failed to send notification:', error);
     return res.status(500).json({ error: 'Failed to send notification' });
   }
-};
+}
