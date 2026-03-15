@@ -20,6 +20,13 @@ export default function NewsletterSignup() {
       await localLeadStorage.addNewsletterSub({
         email
       });
+
+      fetch('/api/notify-submission', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'newsletter', data: { email } }),
+      }).catch(() => {});
+
       setIsSuccess(true);
       setEmail("");
     } catch (error) {

@@ -20,13 +20,21 @@ export default function WorkshopPopup({ isOpen, onClose }) {
     setIsSubmitting(true);
 
     try {
-      await localLeadStorage.addWorkshopRegistration({
+      const workshopData = {
         email,
         full_name: fullName,
         phone,
         company,
         workshop_name: "Humanfire - Talent on the move - Edition#1 The Brand Issue (Creating Lasting Brand Experiences for Talent)"
-      });
+      };
+
+      await localLeadStorage.addWorkshopRegistration(workshopData);
+
+      fetch('/api/notify-submission', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'workshop', data: workshopData }),
+      }).catch(() => {});
 
       setIsSuccess(true);
       

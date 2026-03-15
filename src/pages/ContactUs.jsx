@@ -38,8 +38,11 @@ export default function ContactUs() {
         ...formData
       });
 
-      // Simulating successful email send (backend-less)
-      console.log("Locally saved contact lead:", contact);
+      fetch('/api/notify-submission', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'contact', data: formData }),
+      }).catch(() => {});
 
       setIsSuccess(true);
     } catch (error) {
