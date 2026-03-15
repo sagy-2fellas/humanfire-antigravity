@@ -70,6 +70,7 @@ import ResetPassword from './pages/ResetPassword';
 import Services from './pages/Services';
 import TermsOfService from './pages/TermsOfService';
 import UserManagement from './pages/UserManagement';
+import WorkshopAdmin from './pages/WorkshopAdmin';
 import __Layout from './Layout.jsx';
 
 
@@ -97,6 +98,7 @@ export const PAGES = {
     "Services": Services,
     "TermsOfService": TermsOfService,
     "UserManagement": UserManagement,
+    "WorkshopAdmin": WorkshopAdmin,
 }
 
 export const pagesConfig = {

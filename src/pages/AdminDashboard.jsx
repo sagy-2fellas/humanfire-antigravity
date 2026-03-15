@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, FileText, Users, Mail, Settings, BarChart } from "lucide-react";
+import { BookOpen, FileText, Users, Mail, Settings, CalendarDays } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
@@ -30,12 +30,12 @@ export default function AdminDashboard() {
       color: "bg-green-600"
     },
     {
-      title: "Analytics",
-      description: "View site analytics and insights",
-      icon: BarChart,
-      link: createPageUrl("AdminDashboard"), // You can create this later
-      color: "bg-purple-600"
-    }
+      title: "Workshop Registrations",
+      description: "View and export workshop sign-ups",
+      icon: CalendarDays,
+      link: createPageUrl("WorkshopAdmin"),
+      color: "bg-orange-600"
+    },
   ];
 
   return (

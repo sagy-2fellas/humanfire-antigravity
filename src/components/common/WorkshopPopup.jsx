@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { base44 } from "@/api/base44Client";
+import { localLeadStorage } from "@/api/localLeadStorage";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -20,40 +20,12 @@ export default function WorkshopPopup({ isOpen, onClose }) {
     setIsSubmitting(true);
 
     try {
-      await base44.entities.WorkshopRegistration.create({
+      await localLeadStorage.addWorkshopRegistration({
         email,
         full_name: fullName,
         phone,
         company,
         workshop_name: "Humanfire - Talent on the move - Edition#1 The Brand Issue (Creating Lasting Brand Experiences for Talent)"
-      });
-
-      await base44.integrations.Core.SendEmail({
-        to: "selma@humanfire.co.za",
-        subject: "New Workshop Registration for 'The Brand Issue'",
-        body: `
-<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px; background-color: #fff;">
-  <h2 style="color: #B82E2B; font-size: 20px; margin-bottom: 20px; font-weight: 600;">New Workshop Registration</h2>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">EMAIL:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #B82E2B; margin-bottom: 20px; margin-top: 5px;"><a href="mailto:${email}" style="color: #007bff; text-decoration: none;">${email}</a></p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">FULL NAME:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #B82E2B; margin-bottom: 20px; margin-top: 5px;">${fullName || 'Not provided'}</p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">PHONE:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #B82E2B; margin-bottom: 20px; margin-top: 5px;">${phone || 'Not provided'}</p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">COMPANY:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #B82E2B; margin-bottom: 20px; margin-top: 5px;">${company || 'Not provided'}</p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">WORKSHOP:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #B82E2B; margin-bottom: 20px; margin-top: 5px;">Humanfire - Talent on the move - Edition#1 The Brand Issue (Creating Lasting Brand Experiences for Talent)</p>
-
-  <p style="margin-bottom: 5px; font-weight: 600; color: #555; text-transform: uppercase; font-size: 12px;">SUBMITTED AT:</p>
-  <p style="background-color: #f8f8f8; padding: 12px; border-left: 3px solid #B82E2B; margin-top: 5px;">${new Date().toLocaleString()}</p>
-</div>
-        `
       });
 
       setIsSuccess(true);

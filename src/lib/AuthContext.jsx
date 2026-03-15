@@ -1,7 +1,8 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { appParams } from '@/lib/app-params';
-import { createAxiosClient } from '@base44/sdk/dist/utils/axios-client';
+// Base44 SDK removed — stub createAxiosClient so auth checks are skipped
+const createAxiosClient = () => ({ get: async () => ({}) });
 
 const AuthContext = createContext();
 

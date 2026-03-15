@@ -3,6 +3,7 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const NEWSLETTER_KEY = "hf_newsletter_subs";
 const CONTACT_KEY = "hf_contact_leads";
+const WORKSHOP_KEY = "hf_workshop_registrations";
 
 const getSavedData = (key) => {
   try {
@@ -71,6 +72,32 @@ export const localLeadStorage = {
     leads.push(newLead);
     saveData(CONTACT_KEY, leads);
     return newLead;
+  },
+
+  // Workshop Registration Methods
+  getWorkshopRegistrations: async () => {
+    await delay(300);
+    const regs = getSavedData(WORKSHOP_KEY);
+    return regs.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
+  },
+
+  addWorkshopRegistration: async (data) => {
+    await delay(500);
+    const newReg = {
+      id: "ws_" + Date.now().toString(),
+      email: data.email,
+      full_name: data.full_name || "",
+      phone: data.phone || "",
+      company: data.company || "",
+      workshop_name: data.workshop_name || "",
+      status: "registered",
+      created_date: new Date().toISOString()
+    };
+
+    const regs = getSavedData(WORKSHOP_KEY);
+    regs.push(newReg);
+    saveData(WORKSHOP_KEY, regs);
+    return newReg;
   },
 
   // Generic CSV Export Utility

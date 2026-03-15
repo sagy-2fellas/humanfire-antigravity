@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { base44 } from "@/api/base44Client";
+import { localAuth } from "@/api/localAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,71 +19,22 @@ export default function ForgotPassword() {
     setIsLoading(true);
 
     try {
-      // Check if user exists
-      const users = await base44.entities.User.filter({ email: email });
-      
-      if (users.length > 0) {
-        // Generate unique token
-        const token = Math.random().toString(36).substring(2) + Date.now().toString(36);
-        
-        // Set expiration to 1 hour from now
-        const expiresAt = new Date(Date.now() + 60 * 60 * 1000).toISOString();
-        
-        // Store reset token
-        await base44.entities.PasswordReset.create({
-          user_email: email,
-          token: token,
-          expires_at: expiresAt,
-          used: false
-        });
-        
-        // Send reset email
+      const token = localAuth.createResetToken(email);
+
+      if (token) {
         const resetUrl = `${window.location.origin}${createPageUrl("ResetPassword")}?token=${token}`;
-        
-        await base44.integrations.Core.SendEmail({
-          to: email,
-          subject: "Reset Your humanfire Password",
-          body: `
-<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-  <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 40px; text-align: center;">
-    <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/9775e7da1_Logo_white_divider_transparent.png" alt="humanfire" style="height: 60px; margin-bottom: 20px;">
-    <h1 style="color: #ffffff; margin: 0;">Password Reset Request</h1>
-  </div>
-  
-  <div style="padding: 40px; background: #ffffff;">
-    <p style="color: #334155; font-size: 16px; line-height: 1.6;">
-      You requested to reset your password. Click the button below to create a new password:
-    </p>
-    
-    <div style="text-align: center; margin: 40px 0;">
-      <a href="${resetUrl}" style="display: inline-block; background: linear-gradient(135deg, #B82E2B, #B9472C); color: #ffffff; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">Reset Password</a>
-    </div>
-    
-    <p style="color: #64748b; font-size: 14px; line-height: 1.6;">
-      This link will expire in 1 hour. If you didn't request this, please ignore this email.
-    </p>
-    
-    <p style="color: #94a3b8; font-size: 12px; margin-top: 30px;">
-      If the button doesn't work, copy and paste this link into your browser:<br>
-      <a href="${resetUrl}" style="color: #B82E2B; word-break: break-all;">${resetUrl}</a>
-    </p>
-  </div>
-  
-  <div style="padding: 20px; background: #f1f5f9; text-align: center;">
-    <p style="color: #64748b; font-size: 12px; margin: 0;">
-      &copy; 2025 humanfire. All rights reserved.
-    </p>
-  </div>
-</div>
-          `
+
+        await fetch('/api/send-reset-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, resetUrl }),
         });
       }
-      
+
       // Always show success to prevent email enumeration
       setIsSuccess(true);
     } catch (error) {
       console.error("Password reset request failed:", error);
-      // Still show success to user
       setIsSuccess(true);
     }
     

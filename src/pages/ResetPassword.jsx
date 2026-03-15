@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { base44 } from "@/api/base44Client";
+import { localAuth } from "@/api/localAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,36 +29,14 @@ export default function ResetPassword() {
         return;
       }
 
-      try {
-        const resets = await base44.entities.PasswordReset.filter({ token: token });
-        
-        if (resets.length === 0) {
-          setError("Invalid or expired reset link");
-          setTokenValid(false);
-          return;
-        }
-
-        const reset = resets[0];
-        
-        if (reset.used) {
-          setError("This reset link has already been used");
-          setTokenValid(false);
-          return;
-        }
-
-        const expiresAt = new Date(reset.expires_at);
-        if (expiresAt < new Date()) {
-          setError("This reset link has expired");
-          setTokenValid(false);
-          return;
-        }
-
-        setUserEmail(reset.user_email);
-        setTokenValid(true);
-      } catch (error) {
-        setError("Failed to verify reset link");
+      const resetData = localAuth.validateResetToken(token);
+      if (!resetData) {
+        setError("Invalid or expired reset link");
         setTokenValid(false);
+        return;
       }
+      setUserEmail(resetData.email);
+      setTokenValid(true);
     };
 
     verifyToken();
@@ -81,35 +59,10 @@ export default function ResetPassword() {
     setIsLoading(true);
 
     try {
-      // Get the reset record
-      const resets = await base44.entities.PasswordReset.filter({ token: token });
-      const reset = resets[0];
-
-      // Update user password using Base44's update password method
-      // Since we can't directly update another user's password from frontend,
-      // we'll use the email integration to notify admin
-      await base44.integrations.Core.SendEmail({
-        to: "selma@humanfire.co.za",
-        subject: `Password Reset Request for ${userEmail}`,
-        body: `
-<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-  <h2 style="color: #B82E2B;">Manual Password Reset Required</h2>
-  <p>User <strong>${userEmail}</strong> has requested a password reset.</p>
-  <p>Please manually reset their password in the Base44 dashboard.</p>
-  <p><strong>New Password:</strong> ${password}</p>
-  <p style="color: #64748b; font-size: 12px; margin-top: 20px;">
-    For security, please change this password immediately after setting it and instruct the user to update it.
-  </p>
-</div>
-        `
-      });
-
-      // Mark token as used
-      await base44.entities.PasswordReset.update(reset.id, { used: true });
-
+      localAuth.resetPassword(token, password);
       setIsSuccess(true);
-    } catch (error) {
-      setError("Failed to reset password. Please try again or contact support.");
+    } catch (err) {
+      setError(err.message || "Failed to reset password. Please try again.");
     }
     
     setIsLoading(false);
@@ -155,9 +108,9 @@ export default function ResetPassword() {
               <div className="w-20 h-20 bg-green-900/30 border-2 border-green-500/30 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="w-10 h-10 text-green-400" />
               </div>
-              <h1 className="text-2xl font-bold text-white mb-4">Request Submitted</h1>
+              <h1 className="text-2xl font-bold text-white mb-4">Password Reset</h1>
               <p className="text-slate-400 mb-6">
-                Your password reset request has been submitted. An administrator will process it shortly and you'll receive confirmation.
+                Your password has been updated successfully. You can now log in with your new password.
               </p>
               <Link to={createPageUrl("AdminLogin")}>
                 <Button className="fire-button text-white w-full">

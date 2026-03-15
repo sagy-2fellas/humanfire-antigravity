@@ -7,6 +7,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import AdminRoute from '@/components/AdminRoute';
+
+const ADMIN_PAGES = ['AdminDashboard', 'BlogAdmin', 'BlogEditor', 'ContactAdmin', 'NewsletterAdmin', 'WorkshopAdmin', 'UserManagement'];
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -53,7 +56,11 @@ const AuthenticatedApp = () => {
           path={`/${path}`}
           element={
             <LayoutWrapper currentPageName={path}>
-              <Page />
+              {ADMIN_PAGES.includes(path) ? (
+                <AdminRoute><Page /></AdminRoute>
+              ) : (
+                <Page />
+              )}
             </LayoutWrapper>
           }
         />

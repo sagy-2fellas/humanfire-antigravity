@@ -4,29 +4,30 @@ import { localLeadStorage } from "@/api/localLeadStorage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
-import { Loader2, User, Building, Mail, CalendarDays, Download } from "lucide-react";
+import { Loader2, User, Building, Mail, Phone, CalendarDays, Download } from "lucide-react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-export default function ContactAdmin() {
-  const [searchName, setSearchName] = React.useState("");
+export default function WorkshopAdmin() {
+  const [searchTerm, setSearchTerm] = React.useState("");
 
-  const { data: leads, isLoading, isError, error } = useQuery({
-    queryKey: ["contact-leads"],
-    queryFn: () => localLeadStorage.getContactLeads(),
+  const { data: registrations, isLoading, isError, error } = useQuery({
+    queryKey: ["workshop-registrations"],
+    queryFn: () => localLeadStorage.getWorkshopRegistrations(),
     initialData: [],
   });
 
-  const filteredLeads = React.useMemo(() => {
-    if (!leads) return [];
-    return leads.filter((lead) => {
-      const fullName = `${lead.first_name || ''} ${lead.last_name || ''}`.toLowerCase();
-      const matchName = fullName.includes(searchName.toLowerCase());
-      const matchCompany = (lead.company || '').toLowerCase().includes(searchName.toLowerCase());
-      return matchName || matchCompany;
+  const filteredRegistrations = React.useMemo(() => {
+    if (!registrations) return [];
+    return registrations.filter((reg) => {
+      const term = searchTerm.toLowerCase();
+      const matchName = (reg.full_name || '').toLowerCase().includes(term);
+      const matchEmail = (reg.email || '').toLowerCase().includes(term);
+      const matchCompany = (reg.company || '').toLowerCase().includes(term);
+      return matchName || matchEmail || matchCompany;
     });
-  }, [leads, searchName]);
+  }, [registrations, searchTerm]);
 
   if (isLoading) {
     return (
@@ -52,36 +53,36 @@ export default function ContactAdmin() {
         transition={{ duration: 0.5 }}
         className="max-w-7xl mx-auto"
       >
-        <h1 className="text-4xl font-bold text-slate-100 mb-6">Contact Leads</h1>
-        <p className="text-slate-400 mb-8">Manage and export demo requests and contact submissions.</p>
+        <h1 className="text-4xl font-bold text-slate-100 mb-6">Workshop Registrations</h1>
+        <p className="text-slate-400 mb-8">Manage and export workshop registration submissions.</p>
 
         <Card className="bg-slate-800 border-slate-700 text-slate-100 shadow-lg">
           <CardHeader className="flex-row items-center justify-between">
-            <CardTitle className="text-2xl font-semibold">Leads ({filteredLeads.length})</CardTitle>
+            <CardTitle className="text-2xl font-semibold">Registrations ({filteredRegistrations.length})</CardTitle>
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <Input
-                  placeholder="Search by name or company..."
-                  value={searchName}
-                  onChange={(e) => setSearchName(e.target.value)}
-                  className="pl-10 w-64 bg-slate-700 border-slate-600 text-slate-100 focus:border-red-600"
+                  placeholder="Search by name, email or company..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 w-72 bg-slate-700 border-slate-600 text-slate-100 focus:border-red-600"
                 />
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               </div>
-              <Button 
-                onClick={() => localLeadStorage.exportToCSV(filteredLeads, 'contact_leads')}
+              <Button
+                onClick={() => localLeadStorage.exportToCSV(filteredRegistrations, 'workshop_registrations')}
                 className="bg-green-600 hover:bg-green-700 text-white"
-                disabled={filteredLeads.length === 0}
+                disabled={filteredRegistrations.length === 0}
               >
                 <Download className="w-4 h-4 mr-2" />
-                Export Filtered CSV
+                Export CSV
               </Button>
             </div>
           </CardHeader>
           <CardContent>
-            {filteredLeads.length === 0 ? (
+            {filteredRegistrations.length === 0 ? (
               <p className="text-center text-slate-400 py-8">
-                No contact leads found matching your criteria.
+                No workshop registrations found matching your criteria.
               </p>
             ) : (
               <div className="overflow-x-auto rounded-lg border border-slate-700">
@@ -89,40 +90,46 @@ export default function ContactAdmin() {
                   <TableHeader className="bg-slate-700">
                     <TableRow>
                       <TableHead className="text-slate-300">Name</TableHead>
-                      <TableHead className="text-slate-300">Company</TableHead>
-                      <TableHead className="text-slate-300">Position</TableHead>
                       <TableHead className="text-slate-300">Email</TableHead>
-                      <TableHead className="text-slate-300">Interest</TableHead>
+                      <TableHead className="text-slate-300">Phone</TableHead>
+                      <TableHead className="text-slate-300">Company</TableHead>
+                      <TableHead className="text-slate-300">Workshop</TableHead>
+                      <TableHead className="text-slate-300">Status</TableHead>
                       <TableHead className="text-slate-300">Date</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredLeads.map((lead) => (
-                      <TableRow key={lead.id} className="border-slate-700 hover:bg-slate-700/50">
+                    {filteredRegistrations.map((reg) => (
+                      <TableRow key={reg.id} className="border-slate-700 hover:bg-slate-700/50">
                         <TableCell className="font-medium text-slate-200">
                           <User className="inline-block h-4 w-4 mr-2 text-slate-400" />
-                          {lead.first_name} {lead.last_name}
+                          {reg.full_name || "N/A"}
                         </TableCell>
                         <TableCell className="text-slate-300">
-                          <Building className="inline-block h-4 w-4 mr-2 text-slate-400" />
-                          {lead.company || "N/A"}
-                          {lead.company_size && <span className="text-xs text-slate-500 ml-2">({lead.company_size})</span>}
-                        </TableCell>
-                        <TableCell className="text-slate-300">
-                          {lead.position || "N/A"}
-                        </TableCell>
-                        <TableCell className="text-slate-300">
-                          <a href={`mailto:${lead.email}`} className="text-red-400 hover:underline">
+                          <a href={`mailto:${reg.email}`} className="text-red-400 hover:underline">
                             <Mail className="inline-block h-4 w-4 mr-2" />
-                            {lead.email}
+                            {reg.email}
                           </a>
                         </TableCell>
                         <TableCell className="text-slate-300">
-                          {lead.interest || "N/A"}
+                          <Phone className="inline-block h-4 w-4 mr-2 text-slate-400" />
+                          {reg.phone || "N/A"}
+                        </TableCell>
+                        <TableCell className="text-slate-300">
+                          <Building className="inline-block h-4 w-4 mr-2 text-slate-400" />
+                          {reg.company || "N/A"}
+                        </TableCell>
+                        <TableCell className="text-slate-300 max-w-[200px] truncate">
+                          {reg.workshop_name || "N/A"}
+                        </TableCell>
+                        <TableCell>
+                          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-500/20 text-green-400">
+                            {reg.status}
+                          </span>
                         </TableCell>
                         <TableCell className="text-slate-300">
                           <CalendarDays className="inline-block h-4 w-4 mr-2 text-slate-400" />
-                          {format(new Date(lead.created_date), "MMM d, yyyy")}
+                          {format(new Date(reg.created_date), "MMM d, yyyy")}
                         </TableCell>
                       </TableRow>
                     ))}
