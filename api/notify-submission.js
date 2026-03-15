@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'sagy.shein@gmail.com';
+const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'sagy@2fellasmedia.com';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
