@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { localAuth } from "@/api/localAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +28,14 @@ export default function UserManagement() {
     setError("");
     try {
       localAuth.addAdmin(newAdmin);
+
+      const loginUrl = `${window.location.origin}${createPageUrl("AdminLogin")}`;
+      emailjs.send('service_x2ddgjf', 'template_wpbj9id', {
+        to_email: newAdmin.email,
+        subject: 'You Have Been Added as a humanfire Admin',
+        message: `Hi ${newAdmin.full_name},\n\nYou have been added as an administrator on the humanfire platform.\n\nHere are your login details:\n\nEmail: ${newAdmin.email}\nPassword: ${newAdmin.password}\n\nLogin here: ${loginUrl}\n\nPlease change your password after your first login.\n\nBest regards,\nhumanfire Team`,
+      }, 'epUIa8edYGpJPViy9').catch(() => {});
+
       refreshAdmins();
       setNewAdmin({ full_name: "", email: "", password: "" });
       setIsAddDialogOpen(false);
