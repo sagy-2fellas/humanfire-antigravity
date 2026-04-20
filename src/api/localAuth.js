@@ -7,13 +7,22 @@
  *   password: humanfire2024
  */
 
-const DEFAULT_ADMIN = {
-  email: "sagy.shein@gmail.com",
-  password: "humanfire2024",
-  full_name: "Humanfire Admin",
-  role: "admin",
-  created_date: "2025-01-01T00:00:00.000Z"
-};
+const DEFAULT_ADMINS = [
+  {
+    email: "sagy.shein@gmail.com",
+    password: "humanfire2024",
+    full_name: "Humanfire Admin",
+    role: "admin",
+    created_date: "2025-01-01T00:00:00.000Z"
+  },
+  {
+    email: "selma@humanfire.co",
+    password: "Don450Nat245",
+    full_name: "Selma de Morney",
+    role: "admin",
+    created_date: "2025-01-01T00:00:00.000Z"
+  }
+];
 
 const SESSION_KEY = "hf_admin_session";
 const RESET_KEY = "hf_password_reset";
@@ -22,9 +31,11 @@ const ADMINS_KEY = "hf_admin_accounts";
 function getAdmins() {
   const stored = localStorage.getItem(ADMINS_KEY);
   if (!stored) {
-    // Migrate: seed with default admin (preserve any custom password)
+    // Seed with default admins (preserve any custom password for first admin)
     const customPassword = localStorage.getItem("hf_admin_password");
-    const initial = [{ ...DEFAULT_ADMIN, password: customPassword || DEFAULT_ADMIN.password }];
+    const initial = DEFAULT_ADMINS.map((admin, i) =>
+      i === 0 && customPassword ? { ...admin, password: customPassword } : { ...admin }
+    );
     localStorage.setItem(ADMINS_KEY, JSON.stringify(initial));
     return initial;
   }
@@ -135,6 +146,6 @@ export const localAuth = {
 
   getPassword() {
     const admins = getAdmins();
-    return admins[0]?.password || DEFAULT_ADMIN.password;
+    return admins[0]?.password || DEFAULT_ADMINS[0].password;
   }
 };
