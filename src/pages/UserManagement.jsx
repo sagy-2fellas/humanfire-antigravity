@@ -1,53 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Users, Shield, Mail, Calendar, ShieldAlert, Key } from "lucide-react";
+import { Users, Shield, Mail, Calendar, Key } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { format } from "date-fns";
 
 export default function UserManagement() {
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const isAuth = await base44.auth.isAuthenticated();
-
-        if (!isAuth) {
-          window.location.href = `${createPageUrl("AdminLogin")}?next=${encodeURIComponent(window.location.href)}`;
-          return;
-        }
-
-        setIsAuthenticated(true);
-        const user = await base44.auth.me();
-
-        if (user.role === 'admin') {
-          setIsAuthorized(true);
-        }
-      } catch (error) {
-        window.location.href = `${createPageUrl("AdminLogin")}?next=${encodeURIComponent(window.location.href)}`;
-      } finally {
-        setIsCheckingAuth(false);
-      }
-    };
-    checkAuth();
-  }, []);
-
   const { data: users = [], isLoading } = useQuery({
     queryKey: ['users'],
     queryFn: () => base44.entities.User.list('-created_date', 100),
-    enabled: isAuthorized
+    enabled: true
   });
 
   const sendResetEmailMutation = useMutation({
@@ -118,46 +90,6 @@ export default function UserManagement() {
     if (!selectedUser) return;
     sendResetEmailMutation.mutate(selectedUser.email);
   };
-
-  if (isCheckingAuth) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block w-12 h-12 border-4 border-red-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-          <p className="text-slate-400">Verifying access...</p>
-        </div>
-      </div>);
-
-  }
-
-  if (isAuthenticated && !isAuthorized) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-md w-full">
-
-          <Card className="glass-effect border-2 border-red-600/30">
-            <CardContent className="p-12 text-center">
-              <div className="w-20 h-20 bg-red-900/30 border-2 border-red-600/30 rounded-full flex items-center justify-center mx-auto mb-6">
-                <ShieldAlert className="w-10 h-10 text-red-400" />
-              </div>
-              <h1 className="text-2xl font-bold text-white mb-4">Access Denied</h1>
-              <p className="text-slate-400 mb-6">
-                You don't have permission to access this page. Admin privileges are required.
-              </p>
-              <Link to={createPageUrl("Home")}>
-                <Button className="fire-button text-white">
-                  Return to Home
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </div>);
-
-  }
 
   const stats = {
     total: users.length,
