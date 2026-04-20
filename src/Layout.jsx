@@ -268,6 +268,16 @@ export default function Layout({ children, currentPageName }) {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-48 bg-white border-slate-200">
                     <DropdownMenuItem asChild>
+                      <Link to={createPageUrl("AdminDashboard")} className="w-full hover:bg-[#B82E2B]/10 text-[#12103F] transition-colors font-body">
+                        Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to={createPageUrl("UserManagement")} className="w-full hover:bg-[#B82E2B]/10 text-[#12103F] transition-colors font-body">
+                        Manage Users
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
                       <Link to={createPageUrl("BlogAdmin")} className="w-full hover:bg-[#B82E2B]/10 text-[#12103F] transition-colors font-body">
                         Manage Blog
                       </Link>
@@ -276,11 +286,6 @@ export default function Layout({ children, currentPageName }) {
                       <Link to={createPageUrl("BlogEditor")} className="w-full hover:bg-[#B82E2B]/10 text-[#12103F] transition-colors flex items-center font-body">
                         <Edit className="w-3 h-3 mr-2" />
                         Write New Post
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link to={createPageUrl("AdminDashboard")} className="w-full hover:bg-[#B82E2B]/10 text-[#12103F] transition-colors font-body">
-                        Dashboard
                       </Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -356,6 +361,20 @@ export default function Layout({ children, currentPageName }) {
                 <div className="text-[#B82E2B] font-body font-normal">Admin</div>
                 <div className="pl-4 space-y-2">
                   <Link
+                  to={createPageUrl("AdminDashboard")}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block text-[#12103F]/80 hover:text-[#B82E2B] text-sm transition-colors font-body">
+
+                    Dashboard
+                  </Link>
+                  <Link
+                  to={createPageUrl("UserManagement")}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block text-[#12103F]/80 hover:text-[#B82E2B] text-sm transition-colors font-body">
+
+                    Manage Users
+                  </Link>
+                  <Link
                   to={createPageUrl("BlogAdmin")}
                   onClick={() => setIsMenuOpen(false)}
                   className="block text-[#12103F]/80 hover:text-[#B82E2B] text-sm transition-colors font-body">
@@ -368,13 +387,6 @@ export default function Layout({ children, currentPageName }) {
                   className="block text-[#12103F]/80 hover:text-[#B82E2B] text-sm transition-colors font-body">
 
                     Write New Post
-                  </Link>
-                  <Link
-                  to={createPageUrl("AdminDashboard")}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block text-[#12103F]/80 hover:text-[#B82E2B] text-sm transition-colors font-body">
-
-                    Dashboard
                   </Link>
                 </div>
               </div>
