@@ -97,31 +97,31 @@ export default function ContactAdmin() {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label className="text-slate-300">First Name *</Label>
-                        <Input required placeholder="e.g. Caroline" value={newLead.first_name} onChange={(e) => setNewLead(p => ({ ...p, first_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                        <Input required placeholder="First name" value={newLead.first_name} onChange={(e) => setNewLead(p => ({ ...p, first_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
                       </div>
                       <div className="space-y-2">
                         <Label className="text-slate-300">Last Name *</Label>
-                        <Input required placeholder="e.g. Heap" value={newLead.last_name} onChange={(e) => setNewLead(p => ({ ...p, last_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                        <Input required placeholder="Last name" value={newLead.last_name} onChange={(e) => setNewLead(p => ({ ...p, last_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <Label className="text-slate-300">Email *</Label>
-                      <Input required type="email" placeholder="e.g. caroline.heap@core.co.za" value={newLead.email} onChange={(e) => setNewLead(p => ({ ...p, email: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                      <Input required type="email" placeholder="Email address" value={newLead.email} onChange={(e) => setNewLead(p => ({ ...p, email: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label className="text-slate-300">Company</Label>
-                        <Input placeholder="e.g. Core Group" value={newLead.company} onChange={(e) => setNewLead(p => ({ ...p, company: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                        <Input placeholder="Company name" value={newLead.company} onChange={(e) => setNewLead(p => ({ ...p, company: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
                       </div>
                       <div className="space-y-2">
                         <Label className="text-slate-300">Position</Label>
-                        <Input placeholder="e.g. HR Executive" value={newLead.position} onChange={(e) => setNewLead(p => ({ ...p, position: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                        <Input placeholder="Job title" value={newLead.position} onChange={(e) => setNewLead(p => ({ ...p, position: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label className="text-slate-300">Phone</Label>
-                        <Input placeholder="e.g. 0828851240" value={newLead.phone} onChange={(e) => setNewLead(p => ({ ...p, phone: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                        <Input placeholder="Phone number" value={newLead.phone} onChange={(e) => setNewLead(p => ({ ...p, phone: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
                       </div>
                       <div className="space-y-2">
                         <Label className="text-slate-300">Company Size</Label>
@@ -157,7 +157,7 @@ export default function ContactAdmin() {
                     </div>
                     <div className="space-y-2">
                       <Label className="text-slate-300">Message</Label>
-                      <Input placeholder="e.g. AI and employee culture" value={newLead.message} onChange={(e) => setNewLead(p => ({ ...p, message: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                      <Input placeholder="Additional notes" value={newLead.message} onChange={(e) => setNewLead(p => ({ ...p, message: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
