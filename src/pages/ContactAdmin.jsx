@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 export default function ContactAdmin() {
   const [searchName, setSearchName] = React.useState("");
   const [isAddOpen, setIsAddOpen] = React.useState(false);
-  const [newLead, setNewLead] = React.useState({ first_name: "", last_name: "", email: "", phone: "", company: "", position: "", company_size: "", interest: "", message: "" });
+  const [newLead, setNewLead] = React.useState({ first_name: "", last_name: "", email: "", phone: "", company: "", position: "", company_size: "", interest: "", message: "", source: "demo_request", status: "new" });
   const queryClient = useQueryClient();
 
   const { data: leads, isLoading, isError, error } = useQuery({
@@ -38,7 +38,7 @@ export default function ContactAdmin() {
     e.preventDefault();
     await localLeadStorage.addContactLead(newLead);
     queryClient.invalidateQueries({ queryKey: ["contact-leads"] });
-    setNewLead({ first_name: "", last_name: "", email: "", phone: "", company: "", position: "", company_size: "", interest: "", message: "" });
+    setNewLead({ first_name: "", last_name: "", email: "", phone: "", company: "", position: "", company_size: "", interest: "", message: "", source: "demo_request", status: "new" });
     setIsAddOpen(false);
   };
 
@@ -96,30 +96,48 @@ export default function ContactAdmin() {
                   <form onSubmit={handleAddLead} className="space-y-4 py-2">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label className="text-slate-300">First Name</Label>
-                        <Input required value={newLead.first_name} onChange={(e) => setNewLead(p => ({ ...p, first_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                        <Label className="text-slate-300">First Name *</Label>
+                        <Input required placeholder="e.g. Caroline" value={newLead.first_name} onChange={(e) => setNewLead(p => ({ ...p, first_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
                       </div>
                       <div className="space-y-2">
-                        <Label className="text-slate-300">Last Name</Label>
-                        <Input required value={newLead.last_name} onChange={(e) => setNewLead(p => ({ ...p, last_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                        <Label className="text-slate-300">Last Name *</Label>
+                        <Input required placeholder="e.g. Heap" value={newLead.last_name} onChange={(e) => setNewLead(p => ({ ...p, last_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Label className="text-slate-300">Email</Label>
-                      <Input required type="email" value={newLead.email} onChange={(e) => setNewLead(p => ({ ...p, email: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-slate-300">Phone</Label>
-                      <Input value={newLead.phone} onChange={(e) => setNewLead(p => ({ ...p, phone: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                      <Label className="text-slate-300">Email *</Label>
+                      <Input required type="email" placeholder="e.g. caroline.heap@core.co.za" value={newLead.email} onChange={(e) => setNewLead(p => ({ ...p, email: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label className="text-slate-300">Company</Label>
-                        <Input value={newLead.company} onChange={(e) => setNewLead(p => ({ ...p, company: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                        <Input placeholder="e.g. Core Group" value={newLead.company} onChange={(e) => setNewLead(p => ({ ...p, company: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
                       </div>
                       <div className="space-y-2">
                         <Label className="text-slate-300">Position</Label>
-                        <Input value={newLead.position} onChange={(e) => setNewLead(p => ({ ...p, position: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                        <Input placeholder="e.g. HR Executive" value={newLead.position} onChange={(e) => setNewLead(p => ({ ...p, position: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label className="text-slate-300">Phone</Label>
+                        <Input placeholder="e.g. 0828851240" value={newLead.phone} onChange={(e) => setNewLead(p => ({ ...p, phone: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-slate-300">Company Size</Label>
+                        <Select value={newLead.company_size} onValueChange={(v) => setNewLead(p => ({ ...p, company_size: v }))}>
+                          <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-200">
+                            <SelectValue placeholder="Select size" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-slate-800 border-slate-700">
+                            <SelectItem value="1-10">1-10</SelectItem>
+                            <SelectItem value="11-50">11-50</SelectItem>
+                            <SelectItem value="51-200">51-200</SelectItem>
+                            <SelectItem value="201-500">201-500</SelectItem>
+                            <SelectItem value="501-1000">501-1000</SelectItem>
+                            <SelectItem value="1000+">1000+</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -136,6 +154,41 @@ export default function ContactAdmin() {
                           <SelectItem value="general">General Inquiry</SelectItem>
                         </SelectContent>
                       </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">Message</Label>
+                      <Input placeholder="e.g. AI and employee culture" value={newLead.message} onChange={(e) => setNewLead(p => ({ ...p, message: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label className="text-slate-300">Source</Label>
+                        <Select value={newLead.source} onValueChange={(v) => setNewLead(p => ({ ...p, source: v }))}>
+                          <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-200">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent className="bg-slate-800 border-slate-700">
+                            <SelectItem value="demo_request">Demo Request</SelectItem>
+                            <SelectItem value="contact_form">Contact Form</SelectItem>
+                            <SelectItem value="referral">Referral</SelectItem>
+                            <SelectItem value="event">Event</SelectItem>
+                            <SelectItem value="manual">Manual Entry</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-slate-300">Status</Label>
+                        <Select value={newLead.status} onValueChange={(v) => setNewLead(p => ({ ...p, status: v }))}>
+                          <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-200">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent className="bg-slate-800 border-slate-700">
+                            <SelectItem value="new">New</SelectItem>
+                            <SelectItem value="contacted">Contacted</SelectItem>
+                            <SelectItem value="qualified">Qualified</SelectItem>
+                            <SelectItem value="converted">Converted</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
                     <Button type="submit" className="w-full fire-button text-white">Add Lead</Button>
                   </form>

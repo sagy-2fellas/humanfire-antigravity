@@ -62,9 +62,9 @@ export const localLeadStorage = {
     await delay(500);
     const newLead = {
       id: "lead_" + Date.now().toString(),
-      ...data,
       source: "demo_request",
       status: "new",
+      ...data,
       created_date: new Date().toISOString()
     };
     
