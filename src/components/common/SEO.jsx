@@ -6,7 +6,7 @@ const DEFAULT_DESCRIPTION = "humanfire helps organisations design smarter talent
 const BASE_URL = "https://humanfire.co";
 
 export default function SEO({ title, description, path = "", noIndex = false }) {
-  const fullTitle = title ? `${title} | ${SITE_NAME}` : DEFAULT_TITLE;
+  const fullTitle = title ? `${SITE_NAME} | ${title}` : DEFAULT_TITLE;
   const metaDescription = description || DEFAULT_DESCRIPTION;
   const canonicalUrl = `${BASE_URL}${path}`;
 
