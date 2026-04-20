@@ -1,39 +1,55 @@
 /**
- * Local Auth — simple localStorage-based authentication
+ * Local Auth — localStorage-based authentication with multi-admin support
  * No external backend required.
- * 
- * Default credentials:
- *   email:    admin@humanfire.co
+ *
+ * Default admin:
+ *   email:    sagy.shein@gmail.com
  *   password: humanfire2024
  */
 
-const ADMIN_CREDENTIALS = {
+const DEFAULT_ADMIN = {
   email: "sagy.shein@gmail.com",
   password: "humanfire2024",
   full_name: "Humanfire Admin",
-  role: "admin"
+  role: "admin",
+  created_date: "2025-01-01T00:00:00.000Z"
 };
 
 const SESSION_KEY = "hf_admin_session";
 const RESET_KEY = "hf_password_reset";
+const ADMINS_KEY = "hf_admin_accounts";
+
+function getAdmins() {
+  const stored = localStorage.getItem(ADMINS_KEY);
+  if (!stored) {
+    // Migrate: seed with default admin (preserve any custom password)
+    const customPassword = localStorage.getItem("hf_admin_password");
+    const initial = [{ ...DEFAULT_ADMIN, password: customPassword || DEFAULT_ADMIN.password }];
+    localStorage.setItem(ADMINS_KEY, JSON.stringify(initial));
+    return initial;
+  }
+  return JSON.parse(stored);
+}
+
+function saveAdmins(admins) {
+  localStorage.setItem(ADMINS_KEY, JSON.stringify(admins));
+}
 
 export const localAuth = {
   async login(email, password) {
-    const currentPassword = localStorage.getItem("hf_admin_password") || ADMIN_CREDENTIALS.password;
-    if (
-      email === ADMIN_CREDENTIALS.email &&
-      password === currentPassword
-    ) {
-      const session = {
-        email: ADMIN_CREDENTIALS.email,
-        full_name: ADMIN_CREDENTIALS.full_name,
-        role: ADMIN_CREDENTIALS.role,
-        loggedInAt: new Date().toISOString()
-      };
-      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-      return session;
+    const admins = getAdmins();
+    const admin = admins.find(a => a.email.toLowerCase() === email.toLowerCase());
+    if (!admin || admin.password !== password) {
+      throw new Error("Invalid email or password");
     }
-    throw new Error("Invalid email or password");
+    const session = {
+      email: admin.email,
+      full_name: admin.full_name,
+      role: admin.role,
+      loggedInAt: new Date().toISOString()
+    };
+    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    return session;
   },
 
   async logout() {
@@ -50,8 +66,43 @@ export const localAuth = {
     return JSON.parse(session);
   },
 
+  // Multi-admin management
+  listAdmins() {
+    return getAdmins().map(({ password, ...rest }) => rest);
+  },
+
+  addAdmin({ email, full_name, password }) {
+    const admins = getAdmins();
+    if (admins.some(a => a.email.toLowerCase() === email.toLowerCase())) {
+      throw new Error("An admin with this email already exists");
+    }
+    const newAdmin = {
+      email,
+      full_name,
+      password,
+      role: "admin",
+      created_date: new Date().toISOString()
+    };
+    admins.push(newAdmin);
+    saveAdmins(admins);
+    return { ...newAdmin, password: undefined };
+  },
+
+  removeAdmin(email) {
+    const admins = getAdmins();
+    if (admins.length <= 1) {
+      throw new Error("Cannot remove the last admin");
+    }
+    const filtered = admins.filter(a => a.email.toLowerCase() !== email.toLowerCase());
+    if (filtered.length === admins.length) {
+      throw new Error("Admin not found");
+    }
+    saveAdmins(filtered);
+  },
+
   createResetToken(email) {
-    if (email !== ADMIN_CREDENTIALS.email) return null;
+    const admins = getAdmins();
+    if (!admins.some(a => a.email.toLowerCase() === email.toLowerCase())) return null;
     const token = Math.random().toString(36).substring(2) + Date.now().toString(36);
     const expiresAt = new Date(Date.now() + 60 * 60 * 1000).toISOString();
     localStorage.setItem(RESET_KEY, JSON.stringify({ email, token, expiresAt }));
@@ -73,12 +124,17 @@ export const localAuth = {
   resetPassword(token, newPassword) {
     const data = this.validateResetToken(token);
     if (!data) throw new Error("Invalid or expired reset token");
-    ADMIN_CREDENTIALS.password = newPassword;
+    const admins = getAdmins();
+    const admin = admins.find(a => a.email.toLowerCase() === data.email.toLowerCase());
+    if (admin) {
+      admin.password = newPassword;
+      saveAdmins(admins);
+    }
     localStorage.removeItem(RESET_KEY);
-    localStorage.setItem("hf_admin_password", newPassword);
   },
 
   getPassword() {
-    return localStorage.getItem("hf_admin_password") || ADMIN_CREDENTIALS.password;
+    const admins = getAdmins();
+    return admins[0]?.password || DEFAULT_ADMIN.password;
   }
 };
