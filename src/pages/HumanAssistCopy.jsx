@@ -207,7 +207,7 @@ export default function HumanAssistCopy() {
               className="relative hidden lg:block h-[500px] rounded-3xl overflow-hidden shadow-2xl border-4 border-[#6F88B5]/30">
 
               <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/66a724259_coverpage.jpg"
+                src="/images/66a724259_coverpage.jpg"
                 alt="Human interacting with AI interface"
                 className="w-full h-full object-cover" />
 
@@ -347,7 +347,7 @@ export default function HumanAssistCopy() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#6F88B5] to-[#5a6d95] rounded-3xl blur-2xl opacity-50" />
                 <div className="relative w-96 h-96 rounded-3xl flex items-center justify-center shadow-2xl">
                   <img
-                    src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/dfd1e3d7e_1761307876683iwhwms55-removebg-preview.png"
+                    src="/images/dfd1e3d7e_1761307876683iwhwms55-removebg-preview.png"
                     alt="TAILA AI Assistant"
                     className="w-full h-full object-contain" />
 
@@ -380,7 +380,7 @@ Unlike generic AI, TAILA connects your behavioral, role, and performance data to
                 className="relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer group border-4 border-[#6F88B5]/30 hover:border-[#6F88B5]/60 transition-all duration-300">
 
                 <img
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/f95a550cc_Screenshot2025-11-06at144922.png"
+                  src="/images/f95a550cc_Screenshot2025-11-06at144922.png"
                   alt="TAILA Demo"
                   className="w-full h-auto" />
 
@@ -516,7 +516,7 @@ Unlike generic AI, TAILA connects your behavioral, role, and performance data to
 
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-[#6F88B5]/30">
                 <img
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/24713248e_AdobeStock_1117836594.jpg"
+                  src="/images/24713248e_AdobeStock_1117836594.jpg"
                   alt="AI-powered talent insights"
                   className="w-full h-full object-cover" />
 

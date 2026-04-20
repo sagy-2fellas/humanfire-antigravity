@@ -5,63 +5,63 @@ import { motion } from 'framer-motion';
 const clients = [
 {
   name: "On the Dot",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68d58d25391c1a6fec6b2bda/e6b7d38ae_7.png"
+  logo: "/images/e6b7d38ae_7.png"
 },
 {
   name: "Massmart",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68d58d25391c1a6fec6b2bda/d995422ee_5.png"
+  logo: "/images/d995422ee_5.png"
 },
 {
   name: "Astron Energy",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68d58d25391c1a6fec6b2bda/63eeebcff_6.png"
+  logo: "/images/63eeebcff_6.png"
 },
 {
   name: "McDonald's",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68d58d25391c1a6fec6b2bda/99d697d17_8.png"
+  logo: "/images/99d697d17_8.png"
 },
 {
   name: "Aga Khan Foundation",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/5738e38b7_AgaKhanFoundationLOGO_raster200.png"
+  logo: "/images/5738e38b7_AgaKhanFoundationLOGO_raster200.png"
 },
 {
   name: "PureSurvey",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/ea154de99_download1.jpeg"
+  logo: "/images/ea154de99_download1.jpeg"
 },
 {
   name: "Kagiso Media",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/e891b584c_download1.png"
+  logo: "/images/e891b584c_download1.png"
 },
 {
   name: "DHK",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/b54f5edfa_download2.png"
+  logo: "/images/b54f5edfa_download2.png"
 },
 {
   name: "Liberty",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/c1bfa6a20_download3.png"
+  logo: "/images/c1bfa6a20_download3.png"
 },
 {
   name: "Seriti Green",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/9c1a7608c_download4.png"
+  logo: "/images/9c1a7608c_download4.png"
 },
 {
   name: "BCX",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/58026ca34_download5.png"
+  logo: "/images/58026ca34_download5.png"
 },
 {
   name: "HelloKindred",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/251dc6366_download.jpeg"
+  logo: "/images/251dc6366_download.jpeg"
 },
 {
   name: "University of Cape Town",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/de216e298_download.png"
+  logo: "/images/de216e298_download.png"
 },
 {
   name: "Future Managers",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/e0c5b6919_fm-logo-update.png"
+  logo: "/images/e0c5b6919_fm-logo-update.png"
 },
 {
   name: "SAMRC",
-  logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68fb2ab3fec3046c331dd954/b7072da5c_samrc-logo_0.png"
+  logo: "/images/b7072da5c_samrc-logo_0.png"
 }];
 
 export default function StatsSection() {

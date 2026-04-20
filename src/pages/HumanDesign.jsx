@@ -149,7 +149,7 @@ export default function HumanDesign() {
 
               <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl border-4 border-red-500/30">
                 <img
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/83fff7af3_AdobeStock_876973765.jpg"
+                  src="/images/83fff7af3_AdobeStock_876973765.jpg"
                   alt="Human designing with holographic technology"
                   className="w-full h-full object-cover" />
 

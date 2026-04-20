@@ -210,7 +210,7 @@ export default function HumanAssist() {
               className="relative h-[300px] sm:h-[400px] lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl border-4 border-[#6F88B5]/30">
 
               <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/ff90d676f_AdobeStock_837363881.jpg"
+                src="/images/ff90d676f_AdobeStock_837363881.jpg"
                 alt="Human interacting with AI interface"
                 className="w-full h-full object-cover" />
 
@@ -374,7 +374,7 @@ export default function HumanAssist() {
                 ease: "easeInOut"
               }}>
               <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/d98cb3a90_TAILA_AI_that_enhances_the_quality_of_human_relationships__1_-removebg-preview.png"
+                src="/images/d98cb3a90_TAILA_AI_that_enhances_the_quality_of_human_relationships__1_-removebg-preview.png"
                 alt="TAILA AI Assistant"
                 className="w-auto h-40 object-contain drop-shadow-2xl" />
 
@@ -405,7 +405,7 @@ Unlike generic AI, TAILA connects your behavioral, role, and performance data to
                 className="relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer group border-4 border-[#6F88B5]/30 hover:border-[#6F88B5]/60 transition-all duration-300">
 
                 <img
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/f95a550cc_Screenshot2025-11-06at144922.png"
+                  src="/images/f95a550cc_Screenshot2025-11-06at144922.png"
                   alt="TAILA Demo"
                   className="w-full h-auto" />
 

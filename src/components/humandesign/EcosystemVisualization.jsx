@@ -268,7 +268,7 @@ export default function EcosystemVisualization() {
       <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `url("https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68d58d25391c1a6fec6b2bda/39aac9433_Email_Design_Pattern.jpg")`,
+          backgroundImage: `url("/images/39aac9433_Email_Design_Pattern.jpg")`,
           backgroundSize: '150px',
           backgroundRepeat: 'repeat'
         }} />

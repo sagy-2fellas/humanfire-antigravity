@@ -8,23 +8,23 @@ import { createPageUrl } from '@/utils';
 const principles = [
 {
   title: 'Expert-led, future ready.',
-  imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/e288ba045_AdobeStock_12012901651.jpg'
+  imageUrl: '/images/e288ba045_AdobeStock_12012901651.jpg'
 },
 {
   title: 'Bold by design.',
-  imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/e20565eda_AdobeStock_287806654.jpg'
+  imageUrl: '/images/e20565eda_AdobeStock_287806654.jpg'
 },
 {
   title: 'Human at heart.',
-  imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/71dab13e9_AdobeStock_7980500081.jpg'
+  imageUrl: '/images/71dab13e9_AdobeStock_7980500081.jpg'
 },
 {
   title: 'Fast and purposeful.',
-  imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/0d0e2a922_AdobeStock_1404579333.jpg'
+  imageUrl: '/images/0d0e2a922_AdobeStock_1404579333.jpg'
 },
 {
   title: 'Smart meets stunning.',
-  imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/4065b64d6_AdobeStock_1341901434.jpg'
+  imageUrl: '/images/4065b64d6_AdobeStock_1341901434.jpg'
 }];
 
 

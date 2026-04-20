@@ -51,21 +51,21 @@ export default function HumanCulture() {
       title: "Barrier Breakers",
       description: "We decode cultural blockers — from misaligned behaviours to invisible norms — and design strategies to shift them.",
       color: "from-[#491735] to-[#591E45]",
-      imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/8a968a6ba_AdobeStock_1242859607.jpg"
+      imageUrl: "/images/8a968a6ba_AdobeStock_1242859607.jpg"
     },
     {
       icon: Target,
       title: "From Concept to Practice",
       description: "We turn abstract values into lived behaviours through rituals, feedback, and daily habits.",
       color: "from-[#591E45] to-[#491735]",
-      imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/0d620ba59_AdobeStock_856754768.jpg"
+      imageUrl: "/images/0d620ba59_AdobeStock_856754768.jpg"
     },
     {
       icon: Users,
       title: "Clear Ownership, Real Accountability",
       description: "We define who leads culture at every level.",
       color: "from-[#491735] to-[#591E45]",
-      imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/8af2e4938_AdobeStock_13827366981.jpg"
+      imageUrl: "/images/8af2e4938_AdobeStock_13827366981.jpg"
     },
     {
       icon: MessageSquare,
@@ -253,7 +253,7 @@ export default function HumanCulture() {
             >
               <div className="relative aspect-square rounded-3xl overflow-hidden border-4 border-[#591E45]/40 shadow-2xl shadow-[#591E45]/30">
                 <motion.img
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68d58d25391c1a6fec6b2bda/9eebaf541_AdobeStock_13128754921.jpg"
+                  src="/images/9eebaf541_AdobeStock_13128754921.jpg"
                   alt="Culture Transformation"
                   className="w-full h-full object-cover"
                   whileHover={{ scale: 1.05 }}
@@ -344,7 +344,7 @@ export default function HumanCulture() {
         {/* Background Image - More visible */}
         <div className="absolute inset-0">
           <img
-            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/da9ea3e65_AdobeStock_13377500861.jpg"
+            src="/images/da9ea3e65_AdobeStock_13377500861.jpg"
             alt="Culture Design"
             className="w-full h-full object-cover"
           />
@@ -801,7 +801,7 @@ export default function HumanCulture() {
                   <p className="text-xs sm:text-sm text-slate-600 mb-2 sm:mb-3">In partnership with</p>
                   <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
                     <img
-                      src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/f588b6efb_Logo_5-100.jpg"
+                      src="/images/f588b6efb_Logo_5-100.jpg"
                       alt="humanfire logo"
                       className="h-10 sm:h-12 md:h-16 w-auto mx-auto"
                     />

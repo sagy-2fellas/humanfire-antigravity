@@ -13,7 +13,7 @@ const journeySteps = [
     title: "Discover",
     tagline: "Understanding and alignment",
     color: "#B82E2B",
-    imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/28ce1eb90_AdobeStock_12012901651.jpg'
+    imageUrl: '/images/28ce1eb90_AdobeStock_12012901651.jpg'
   },
   {
     icon: Feather,
@@ -21,7 +21,7 @@ const journeySteps = [
     title: "Shape",
     tagline: "Co-creation and design",
     color: "#6F88B5",
-    imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/358961daf_culture5.jpg'
+    imageUrl: '/images/358961daf_culture5.jpg'
   },
   {
     icon: RefreshCw,
@@ -29,7 +29,7 @@ const journeySteps = [
     title: "Mobilise",
     tagline: "Activation and momentum",
     color: "#1A6566",
-    imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/67ae80d3a_AdobeStock_1330914614.jpg'
+    imageUrl: '/images/67ae80d3a_AdobeStock_1330914614.jpg'
   },
   {
     icon: Boxes,
@@ -37,7 +37,7 @@ const journeySteps = [
     title: "Enrich",
     tagline: "Sustainability and evolution",
     color: "#591E45",
-    imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/228465d5c_brandstatements2.jpg'
+    imageUrl: '/images/228465d5c_brandstatements2.jpg'
   }
 ];
 

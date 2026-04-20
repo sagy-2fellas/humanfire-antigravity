@@ -87,7 +87,7 @@ export default function AdminLogin() {
           <CardHeader className="space-y-4 pb-6">
             <div className="flex justify-center">
               <motion.img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/9775e7da1_Logo_white_divider_transparent.png"
+                src="/images/9775e7da1_Logo_white_divider_transparent.png"
                 alt="humanfire"
                 className="h-16 w-auto"
                 whileHover={{ scale: 1.05 }}

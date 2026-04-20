@@ -243,7 +243,7 @@ export default function HumanCultureCopy() {
             >
               <div className="relative aspect-square rounded-3xl overflow-hidden border-4 border-[#6F88B5]/40 shadow-2xl shadow-[#6F88B5]/30">
                 <motion.img
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68d58d25391c1a6fec6b2bda/9eebaf541_AdobeStock_13128754921.jpg"
+                  src="/images/9eebaf541_AdobeStock_13128754921.jpg"
                   alt="Culture Transformation"
                   className="w-full h-full object-cover"
                   whileHover={{ scale: 1.05 }}
@@ -343,7 +343,7 @@ export default function HumanCultureCopy() {
         {/* Background Image with Enhanced Overlay */}
         <div className="absolute inset-0 opacity-10">
           <img
-            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/8e667b077_culture6.jpg"
+            src="/images/8e667b077_culture6.jpg"
             alt="Culture Design"
             className="w-full h-full object-cover"
           />
@@ -805,7 +805,7 @@ export default function HumanCultureCopy() {
                   <p className="text-sm text-slate-600 mb-3">In partnership with</p>
                   <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
                     <img
-                      src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/61bf2124b_Logo_white_divider_transparent.png"
+                      src="/images/61bf2124b_Logo_white_divider_transparent.png"
                       alt="humanfire logo"
                       className="h-12 w-auto mx-auto"
                     />

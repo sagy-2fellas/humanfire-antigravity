@@ -24,21 +24,21 @@ export default function RotatingServicesCards() {
       title: "Barrier Breakers",
       description: "We decode cultural blockers — from misaligned behaviours to invisible norms — and design strategies to shift them.",
       color: "from-[#491735] to-[#591E45]",
-      imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/8a968a6ba_AdobeStock_1242859607.jpg"
+      imageUrl: "/images/8a968a6ba_AdobeStock_1242859607.jpg"
     },
     {
       icon: Target,
       title: "From Concept to Practice",
       description: "We turn abstract values into lived behaviours through rituals, feedback, and daily habits.",
       color: "from-[#591E45] to-[#491735]",
-      imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/0d620ba59_AdobeStock_856754768.jpg"
+      imageUrl: "/images/0d620ba59_AdobeStock_856754768.jpg"
     },
     {
       icon: Users,
       title: "Clear Ownership, Real Accountability",
       description: "We define who leads culture at every level.",
       color: "from-[#491735] to-[#591E45]",
-      imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/8af2e4938_AdobeStock_13827366981.jpg"
+      imageUrl: "/images/8af2e4938_AdobeStock_13827366981.jpg"
     },
     {
       icon: MessageSquare,

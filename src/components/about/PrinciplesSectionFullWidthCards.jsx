@@ -6,27 +6,27 @@ const principles = [
 {
   title: 'Expert-led, future ready.',
   description: 'We bring deep experience and forward-thinking talent strategy',
-  imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/e288ba045_AdobeStock_12012901651.jpg'
+  imageUrl: '/images/e288ba045_AdobeStock_12012901651.jpg'
 },
 {
   title: 'Bold by design.',
   description: 'We challenge norms with brand-focused energy',
-  imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/e20565eda_AdobeStock_287806654.jpg'
+  imageUrl: '/images/e20565eda_AdobeStock_287806654.jpg'
 },
 {
   title: 'Human at heart.',
   description: 'Empathy drives everything we create',
-  imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/71dab13e9_AdobeStock_7980500081.jpg'
+  imageUrl: '/images/71dab13e9_AdobeStock_7980500081.jpg'
 },
 {
   title: 'Fast and purposeful.',
   description: 'We build adaptive, immersive solutions with speed and intent',
-  imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/0d0e2a922_AdobeStock_1404579333.jpg'
+  imageUrl: '/images/0d0e2a922_AdobeStock_1404579333.jpg'
 },
 {
   title: 'Smart meets stunning.',
   description: 'Our work blends strategic depth with creative beauty',
-  imageUrl: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/4065b64d6_AdobeStock_1341901434.jpg'
+  imageUrl: '/images/4065b64d6_AdobeStock_1341901434.jpg'
 }];
 
 

@@ -38,7 +38,7 @@ export default function InteractiveHotspotImage() {
     <div className="relative w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-[#6F88B5]/30">
       {/* Main Image */}
       <img
-        src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/8ed56abed_Screenshot2025-11-09at220002.png"
+        src="/images/8ed56abed_Screenshot2025-11-09at220002.png"
         alt="AI-powered talent insights"
         className="w-full h-full object-cover"
       />

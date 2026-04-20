@@ -141,7 +141,7 @@ export default function HumanInsight() {
               style={{ borderColor: 'rgba(26, 101, 102, 0.3)' }}
             >
               <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/6676b0bab_humaninsight.jpg"
+                src="/images/6676b0bab_humaninsight.jpg"
                 alt="Data Analytics and Insights"
                 className="w-full h-full object-cover"
               />
@@ -218,7 +218,7 @@ export default function HumanInsight() {
                 style={{ borderColor: 'rgba(26, 101, 102, 0.2)' }}
               >
                 <img
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/6e0ff5eb3_Screenshot2025-11-16at133207.png"
+                  src="/images/6e0ff5eb3_Screenshot2025-11-16at133207.png"
                   alt="9 Cell Analytics - Talent Matrix"
                   className="w-full h-full object-contain bg-white p-4"
                 />

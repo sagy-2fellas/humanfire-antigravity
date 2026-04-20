@@ -199,7 +199,7 @@ export default function Layout({ children, currentPageName }) {
             {/* Logo - Now using Image */}
             <Link to={createPageUrl("Home")} className="flex items-center">
               <motion.img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/6d2863d20_Logo_1.png"
+                src="/images/6d2863d20_Logo_1.png"
                 alt="humanfire"
                 className="h-10 w-auto"
                 whileHover={{ scale: 1.05 }}
@@ -419,7 +419,7 @@ export default function Layout({ children, currentPageName }) {
               className="space-y-4">
 
               <motion.img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/9775e7da1_Logo_white_divider_transparent.png"
+                src="/images/9775e7da1_Logo_white_divider_transparent.png"
                 alt="humanfire"
                 className="h-8 w-auto"
                 whileHover={{ scale: 1.05 }}

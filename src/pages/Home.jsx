@@ -34,14 +34,14 @@ export default function Home() {
     {
       name: "selma de morney",
       role: "founder & lead strategist",
-      img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/4b2a261a9_image_1762530973723_8qqsvj_1x1_1024x1024.png",
+      img: "/images/4b2a261a9_image_1762530973723_8qqsvj_1x1_1024x1024.png",
       email: "selma@humanfire.co",
       linkedin: "https://www.linkedin.com/in/selma-de-morney-a332733a/"
     },
     {
       name: "raeesah hassa",
       role: "People and Organisational Development",
-      img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/3e67f85ae_image_1762531014275_9kww68_1x1_1024x1024.png",
+      img: "/images/3e67f85ae_image_1762531014275_9kww68_1x1_1024x1024.png",
       email: "raeesah@humanfire.co",
       linkedin: "https://www.linkedin.com/in/raeesah-hassa/"
     }
@@ -211,7 +211,7 @@ export default function Home() {
         <div
           className="absolute inset-0 opacity-[0.03] rounded-xl sm:rounded-2xl md:rounded-3xl"
           style={{
-            backgroundImage: `url("https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68d58d25391c1a6fec6b2bda/39aac9433_Email_Design_Pattern.jpg")`,
+            backgroundImage: `url("/images/39aac9433_Email_Design_Pattern.jpg")`,
             backgroundSize: '150px',
             backgroundRepeat: 'repeat'
           }}
@@ -259,7 +259,7 @@ export default function Home() {
         <div
           className="absolute inset-0 opacity-[0.02]"
           style={{
-            backgroundImage: `url("https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68d58d25391c1a6fec6b2bda/39aac9433_Email_Design_Pattern.jpg")`,
+            backgroundImage: `url("/images/39aac9433_Email_Design_Pattern.jpg")`,
             backgroundSize: '150px',
             backgroundRepeat: 'repeat'
           }}

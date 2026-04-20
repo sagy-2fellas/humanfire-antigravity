@@ -9,22 +9,22 @@ import { createPageUrl } from "@/utils";
 const cubeData = [
 {
   title: "human+design",
-  imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/eb016b0ba_AdobeStock_876973765.jpg",
+  imageUrl: "/images/eb016b0ba_AdobeStock_876973765.jpg",
   color: "#B82E2B"
 },
 {
   title: "human+assist",
-  imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/ff90d676f_AdobeStock_837363881.jpg",
+  imageUrl: "/images/ff90d676f_AdobeStock_837363881.jpg",
   color: "#6F88B5"
 },
 {
   title: "human+insight",
-  imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68d58d25391c1a6fec6b2bda/88cf9af30_AdobeStock_1423904126.jpg",
+  imageUrl: "/images/88cf9af30_AdobeStock_1423904126.jpg",
   color: "#1A6566"
 },
 {
   title: "human+culture",
-  imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68d58d25391c1a6fec6b2bda/9eebaf541_AdobeStock_13128754921.jpg",
+  imageUrl: "/images/9eebaf541_AdobeStock_13128754921.jpg",
   color: "#591E45"
 }];
 

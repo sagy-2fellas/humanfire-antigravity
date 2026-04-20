@@ -27,21 +27,21 @@ export default function HumanDesignCopy2() {
     title: "Leadership Behaviors & Capability Frameworks",
     description: "Aligned to your strategic demands, we build the behaviors and capabilities your strategy needs to succeed.",
     color: "#B82E2B",
-    imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/e288ba045_AdobeStock_12012901651.jpg"
+    imageUrl: "/images/e288ba045_AdobeStock_12012901651.jpg"
   },
   {
     icon: Target,
     title: "Strategic Sourcing & External Talent Intelligence",
     description: "Build tomorrow's capability today through intelligent sourcing and market insights.",
     color: "#6F88B5",
-    imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/3b45b7d53_whoarewe.jpg"
+    imageUrl: "/images/3b45b7d53_whoarewe.jpg"
   },
   {
     icon: TrendingUp,
     title: "Performance Practice",
     description: "Connect individual goals to organizational growth with personalized learning pathways.",
     color: "#1A6566",
-    imageUrl: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/25a38fb78_AdobeStock_1404579333.jpg"
+    imageUrl: "/images/25a38fb78_AdobeStock_1404579333.jpg"
   },
   {
     icon: Users,
@@ -212,7 +212,7 @@ export default function HumanDesignCopy2() {
 
               <div className="relative w-full h-[600px] rounded-3xl overflow-hidden shadow-2xl border-4 border-red-500/30">
                 <img
-                  src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69074074f7f859062aa83943/83fff7af3_AdobeStock_876973765.jpg"
+                  src="/images/83fff7af3_AdobeStock_876973765.jpg"
                   alt="Human designing with holographic technology"
                   className="w-full h-full object-cover" />
 
