@@ -12,6 +12,7 @@ import HowWeWorkAlternative from "../components/home/HowWeWorkAlternative";
 import PrinciplesSectionHorizontalScroll from "../components/about/PrinciplesSectionHorizontalScroll";
 import NewsletterSignup from "../components/common/NewsletterSignup";
 import WorkshopPopup from "../components/common/WorkshopPopup";
+import SEO from "../components/common/SEO";
 
 export default function Home() {
   const [isWorkshopPopupOpen, setIsWorkshopPopupOpen] = React.useState(false);
@@ -49,7 +50,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen overflow-hidden bg-white">
-      <WorkshopPopup 
+      <SEO
+        title="People Strategy & Talent Management Consulting"
+        description="humanfire partners with organisations to build smarter talent strategies through AI-powered tools, people analytics, culture transformation, and organisational design. Based in South Africa."
+        path="/"
+      />
+      <WorkshopPopup
         isOpen={isWorkshopPopupOpen} 
         onClose={() => setIsWorkshopPopupOpen(false)} 
       />

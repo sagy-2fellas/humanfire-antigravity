@@ -2,8 +2,17 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Shield, Lock, Eye, FileText, UserCheck, AlertCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import SEO from "../components/common/SEO";
 
 export default function PrivacyPolicy() {
+  const seo = (
+    <SEO
+      title="Privacy Policy"
+      description="Read humanfire's privacy policy. Learn how we collect, use, and protect your personal information in accordance with POPIA and South African data protection legislation."
+      path="/PrivacyPolicy"
+    />
+  );
+
   const sections = [
     {
       icon: Shield,
@@ -166,6 +175,7 @@ export default function PrivacyPolicy() {
 
   return (
     <div className="min-h-screen bg-slate-950">
+      {seo}
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">

@@ -2,8 +2,17 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FileText, Scale, Shield, AlertTriangle, CheckCircle, XCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import SEO from "../components/common/SEO";
 
 export default function TermsOfService() {
+  const seo = (
+    <SEO
+      title="Terms of Service"
+      description="Review humanfire's terms of service governing use of our talent management consulting services, AI-powered tools, and website."
+      path="/TermsOfService"
+    />
+  );
+
   const sections = [
     {
       icon: FileText,
@@ -190,6 +199,7 @@ export default function TermsOfService() {
 
   return (
     <div className="min-h-screen bg-slate-950">
+      {seo}
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">

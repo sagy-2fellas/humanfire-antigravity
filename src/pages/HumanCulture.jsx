@@ -27,8 +27,17 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import RotatingServicesCards from "../components/humanculture/RotatingServicesCards";
+import SEO from "../components/common/SEO";
 
 export default function HumanCulture() {
+  const seo = (
+    <SEO
+      title="human+culture — Culture Transformation & Employee Experience"
+      description="Transform your workplace culture with humanfire's human+culture service. We use culture intelligence, barrier-breaking strategies, and business-driven design to create lasting organisational change."
+      path="/HumanCulture"
+    />
+  );
+
   const services = [
     {
       icon: BarChart3,
@@ -117,6 +126,7 @@ export default function HumanCulture() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {seo}
       {/* Animated Background Grid - Enhanced */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0" style={{

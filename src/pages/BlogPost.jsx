@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { format } from "date-fns";
+import SEO from "../components/common/SEO";
 
 const categories = [
   { value: "talent_strategy", label: "Talent Strategy", color: "#B82E2B" },
@@ -74,6 +75,11 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen bg-slate-50">
+      <SEO
+        title={post.title}
+        description={post.excerpt || `Read "${post.title}" on the humanfire blog — insights on talent strategy, HR tech, and the future of work.`}
+        path={`/BlogPost?slug=${post.slug}`}
+      />
       {/* Back Button */}
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

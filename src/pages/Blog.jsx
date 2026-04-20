@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { format } from "date-fns";
+import SEO from "../components/common/SEO";
 
 const categories = [
 { value: "all", label: "All Posts", color: "#B82E2B" },
@@ -42,6 +43,11 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-slate-50">
+      <SEO
+        title="Blog — Insights on Talent Strategy, HR Tech & the Future of Work"
+        description="Read the latest articles from humanfire on talent strategy, HR technology, workplace culture, leadership development, and people analytics. Insights and strategies from the future of work."
+        path="/Blog"
+      />
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-slate-100 via-white to-slate-100 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">

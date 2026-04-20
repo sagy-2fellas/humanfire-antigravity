@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import SEO from "../components/common/SEO";
 
 export default function Services() {
   const coreAreas = [
@@ -62,6 +63,11 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-slate-950">
+      <SEO
+        title="Our Services"
+        description="Explore humanfire's full range of people strategy services — organisational design, AI-powered HR tools, people analytics, culture transformation, talent assessment, and workforce planning."
+        path="/Services"
+      />
       {/* Hero Section */}
       <section className="py-20 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

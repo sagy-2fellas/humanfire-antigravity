@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
+import SEO from "../components/common/SEO";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -23,6 +24,14 @@ const itemVariants = {
 
 export default function HumanInsight() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+
+  const seo = (
+    <SEO
+      title="human+insight — People Analytics & Data-Driven Talent Decisions"
+      description="Turn talent data into actionable insights with humanfire's human+insight service. Automate talent profiles, performance analytics, succession bench strength, retention tracking, and talent value analytics."
+      path="/HumanInsight"
+    />
+  );
 
   const whatWeDo = [
     { icon: Users, title: "Automate and generate talent profiles", description: "We turn talent analytics into creative direction that moves people." },
@@ -41,6 +50,7 @@ export default function HumanInsight() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-[#1A6566]/10 to-slate-950">
+      {seo}
       {/* Animated Background Grid */}
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0" style={{

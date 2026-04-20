@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import SEO from "../components/common/SEO";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -78,6 +79,11 @@ export default function ContactUs() {
 
   return (
     <div className="min-h-screen bg-slate-950 py-20">
+      <SEO
+        title="Contact Us — Book a Consultation"
+        description="Get in touch with humanfire to discuss your talent strategy, organisational design, or HR technology needs. Book a consultation with our team of people strategy experts."
+        path="/ContactUs"
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 80, scale: 0.95 }}

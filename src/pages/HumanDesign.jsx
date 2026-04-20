@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import TalentStrategyFlow from "@/components/humandesign/TalentStrategyFlow";
+import SEO from "../components/common/SEO";
 
 export default function HumanDesign() {
   // const [activeFocus, setActiveFocus] = useState(null);
@@ -48,6 +49,11 @@ export default function HumanDesign() {
 
   return (
     <div className="min-h-screen bg-white overflow-hidden">
+      <SEO
+        title="human+design — Organisational Design & Talent Strategy"
+        description="Build a future-ready organisation with humanfire's human+design service. We help you craft talent philosophy, organisational structure, and employee value propositions using smart, AI-powered capabilities."
+        path="/HumanDesign"
+      />
       {/* 1. Hero Section: Immersive Statement - DARK */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-slate-950">
         {/* Animated Background Pattern */}

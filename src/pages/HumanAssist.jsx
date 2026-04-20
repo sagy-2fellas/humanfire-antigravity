@@ -13,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
+import SEO from "../components/common/SEO";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -40,6 +41,14 @@ const itemVariants = {
 export default function HumanAssist() {
   const [isVideoModalOpen, setIsVideoModalOpen] = React.useState(false);
   const [isTailaVideoOpen, setIsTailaVideoOpen] = React.useState(false);
+
+  const seo = (
+    <SEO
+      title="human+assist — AI-Powered Talent Management Tools"
+      description="Automate talent profiles, performance data, succession planning, and retention analytics with humanfire's human+assist platform. Plug-and-play AI tools for consistent, connected talent practices."
+      path="/HumanAssist"
+    />
+  );
 
   const whatWeDoFeatures = [
   {
@@ -112,6 +121,7 @@ export default function HumanAssist() {
 
   return (
     <div className="min-h-screen bg-white">
+      {seo}
       {/* Hero Section - DARK */}
       <section ref={ref} className="relative py-32 overflow-hidden bg-[#12103F]">
         {/* Animated Background Grid */}
