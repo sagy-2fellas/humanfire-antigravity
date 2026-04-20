@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { localLeadStorage } from "@/api/localLeadStorage";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,11 +22,10 @@ export default function NewsletterSignup() {
         email
       });
 
-      fetch('/api/notify-submission', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'newsletter', data: { email } }),
-      }).catch(() => {});
+      emailjs.send('service_x2ddgjf', 'template_wpbj9id', {
+        subject: 'New Newsletter Subscriber',
+        message: `Email: ${email}`,
+      }, 'epUIa8edYGpJPViy9').catch(() => {});
 
       setIsSuccess(true);
       setEmail("");

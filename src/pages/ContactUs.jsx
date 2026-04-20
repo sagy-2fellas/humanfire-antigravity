@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { localLeadStorage } from "@/api/localLeadStorage";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,11 +39,13 @@ export default function ContactUs() {
         ...formData
       });
 
-      fetch('/api/notify-submission', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'contact', data: formData }),
-      }).catch(() => {});
+      emailjs.send('service_x2ddgjf', 'template_wpbj9id', {
+        subject: 'New Contact/Demo Request',
+        message: Object.entries(formData)
+          .filter(([key]) => key !== 'id' && key !== 'status' && key !== 'source')
+          .map(([key, value]) => `${key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}: ${Array.isArray(value) ? value.join(', ') : (value || 'Not provided')}`)
+          .join('\n'),
+      }, 'epUIa8edYGpJPViy9').catch(() => {});
 
       setIsSuccess(true);
     } catch (error) {

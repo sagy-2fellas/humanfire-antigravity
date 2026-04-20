@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { localAuth } from "@/api/localAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,11 +25,10 @@ export default function ForgotPassword() {
       if (token) {
         const resetUrl = `${window.location.origin}${createPageUrl("ResetPassword")}?token=${token}`;
 
-        await fetch('/api/send-reset-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, resetUrl }),
-        });
+        await emailjs.send('service_x2ddgjf', 'template_wpbj9id', {
+          subject: 'Reset Your humanfire Password',
+          message: `A password reset was requested for ${email}.\n\nClick here to reset: ${resetUrl}\n\nThis link expires in 1 hour.`,
+        }, 'epUIa8edYGpJPViy9');
       }
 
       // Always show success to prevent email enumeration

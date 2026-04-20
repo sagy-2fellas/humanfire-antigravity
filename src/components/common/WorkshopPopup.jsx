@@ -1,4 +1,5 @@
 import React from "react";
+import emailjs from "@emailjs/browser";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,11 +31,12 @@ export default function WorkshopPopup({ isOpen, onClose }) {
 
       await localLeadStorage.addWorkshopRegistration(workshopData);
 
-      fetch('/api/notify-submission', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'workshop', data: workshopData }),
-      }).catch(() => {});
+      emailjs.send('service_x2ddgjf', 'template_wpbj9id', {
+        subject: 'New Workshop Registration',
+        message: Object.entries(workshopData)
+          .map(([key, value]) => `${key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}: ${value || 'Not provided'}`)
+          .join('\n'),
+      }, 'epUIa8edYGpJPViy9').catch(() => {});
 
       setIsSuccess(true);
       
