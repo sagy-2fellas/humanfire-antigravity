@@ -1,16 +1,22 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { localLeadStorage } from "@/api/localLeadStorage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { format } from "date-fns";
-import { Loader2, User, Building, Mail, CalendarDays, Download } from "lucide-react";
+import { Loader2, User, Building, Mail, CalendarDays, Download, UserPlus } from "lucide-react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function ContactAdmin() {
   const [searchName, setSearchName] = React.useState("");
+  const [isAddOpen, setIsAddOpen] = React.useState(false);
+  const [newLead, setNewLead] = React.useState({ first_name: "", last_name: "", email: "", phone: "", company: "", position: "", company_size: "", interest: "", message: "" });
+  const queryClient = useQueryClient();
 
   const { data: leads, isLoading, isError, error } = useQuery({
     queryKey: ["contact-leads"],
@@ -27,6 +33,14 @@ export default function ContactAdmin() {
       return matchName || matchCompany;
     });
   }, [leads, searchName]);
+
+  const handleAddLead = async (e) => {
+    e.preventDefault();
+    await localLeadStorage.addContactLead(newLead);
+    queryClient.invalidateQueries({ queryKey: ["contact-leads"] });
+    setNewLead({ first_name: "", last_name: "", email: "", phone: "", company: "", position: "", company_size: "", interest: "", message: "" });
+    setIsAddOpen(false);
+  };
 
   if (isLoading) {
     return (
@@ -68,13 +82,72 @@ export default function ContactAdmin() {
                 />
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               </div>
-              <Button 
+              <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
+                <DialogTrigger asChild>
+                  <Button className="bg-red-600 hover:bg-red-700 text-white">
+                    <UserPlus className="w-4 h-4 mr-2" />
+                    Add Lead
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-slate-900 border-slate-700 max-h-[90vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle className="text-slate-200">Add Contact Lead</DialogTitle>
+                  </DialogHeader>
+                  <form onSubmit={handleAddLead} className="space-y-4 py-2">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label className="text-slate-300">First Name</Label>
+                        <Input required value={newLead.first_name} onChange={(e) => setNewLead(p => ({ ...p, first_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-slate-300">Last Name</Label>
+                        <Input required value={newLead.last_name} onChange={(e) => setNewLead(p => ({ ...p, last_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">Email</Label>
+                      <Input required type="email" value={newLead.email} onChange={(e) => setNewLead(p => ({ ...p, email: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">Phone</Label>
+                      <Input value={newLead.phone} onChange={(e) => setNewLead(p => ({ ...p, phone: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label className="text-slate-300">Company</Label>
+                        <Input value={newLead.company} onChange={(e) => setNewLead(p => ({ ...p, company: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-slate-300">Position</Label>
+                        <Input value={newLead.position} onChange={(e) => setNewLead(p => ({ ...p, position: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">Interest</Label>
+                      <Select value={newLead.interest} onValueChange={(v) => setNewLead(p => ({ ...p, interest: v }))}>
+                        <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-200">
+                          <SelectValue placeholder="Select interest" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-800 border-slate-700">
+                          <SelectItem value="human_design">human+design</SelectItem>
+                          <SelectItem value="human_assist">human+assist</SelectItem>
+                          <SelectItem value="human_insight">human+insight</SelectItem>
+                          <SelectItem value="human_culture">human+culture</SelectItem>
+                          <SelectItem value="general">General Inquiry</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <Button type="submit" className="w-full fire-button text-white">Add Lead</Button>
+                  </form>
+                </DialogContent>
+              </Dialog>
+              <Button
                 onClick={() => localLeadStorage.exportToCSV(filteredLeads, 'contact_leads')}
                 className="bg-green-600 hover:bg-green-700 text-white"
                 disabled={filteredLeads.length === 0}
               >
                 <Download className="w-4 h-4 mr-2" />
-                Export Filtered CSV
+                Export CSV
               </Button>
             </div>
           </CardHeader>

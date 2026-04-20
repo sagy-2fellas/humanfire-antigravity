@@ -1,10 +1,11 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { localLeadStorage } from "@/api/localLeadStorage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { format } from "date-fns";
-import { Loader2, Mail, Building, User, CalendarDays, Download } from "lucide-react";
+import { Loader2, Mail, Building, User, CalendarDays, Download, UserPlus } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -14,6 +15,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 export default function NewsletterAdmin() {
   const [searchEmail, setSearchEmail] = React.useState("");
   const [showActiveOnly, setShowActiveOnly] = React.useState(false);
+  const [isAddOpen, setIsAddOpen] = React.useState(false);
+  const [newSub, setNewSub] = React.useState({ email: "", first_name: "", company: "" });
+  const queryClient = useQueryClient();
 
   const { data: newsletters, isLoading, isError, error } = useQuery({
     queryKey: ["newsletter-subscriptions"],
@@ -29,6 +33,14 @@ export default function NewsletterAdmin() {
       return matchesEmail && matchesStatus;
     });
   }, [newsletters, searchEmail, showActiveOnly]);
+
+  const handleAddSub = async (e) => {
+    e.preventDefault();
+    await localLeadStorage.addNewsletterSub(newSub);
+    queryClient.invalidateQueries({ queryKey: ["newsletter-subscriptions"] });
+    setNewSub({ email: "", first_name: "", company: "" });
+    setIsAddOpen(false);
+  };
 
   if (isLoading) {
     return (
@@ -79,7 +91,35 @@ export default function NewsletterAdmin() {
                 />
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               </div>
-              <Button 
+              <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
+                <DialogTrigger asChild>
+                  <Button className="bg-red-600 hover:bg-red-700 text-white">
+                    <UserPlus className="w-4 h-4 mr-2" />
+                    Add Subscriber
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-slate-900 border-slate-700">
+                  <DialogHeader>
+                    <DialogTitle className="text-slate-200">Add Newsletter Subscriber</DialogTitle>
+                  </DialogHeader>
+                  <form onSubmit={handleAddSub} className="space-y-4 py-2">
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">Email</Label>
+                      <Input required type="email" value={newSub.email} onChange={(e) => setNewSub(p => ({ ...p, email: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">First Name</Label>
+                      <Input value={newSub.first_name} onChange={(e) => setNewSub(p => ({ ...p, first_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">Company</Label>
+                      <Input value={newSub.company} onChange={(e) => setNewSub(p => ({ ...p, company: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                    </div>
+                    <Button type="submit" className="w-full fire-button text-white">Add Subscriber</Button>
+                  </form>
+                </DialogContent>
+              </Dialog>
+              <Button
                 onClick={() => localLeadStorage.exportToCSV(filteredNewsletters, 'newsletter_subscribers')}
                 className="bg-green-600 hover:bg-green-700 text-white"
                 disabled={filteredNewsletters.length === 0}

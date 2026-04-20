@@ -1,16 +1,21 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { localLeadStorage } from "@/api/localLeadStorage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
 import { format } from "date-fns";
-import { Loader2, User, Building, Mail, Phone, CalendarDays, Download } from "lucide-react";
+import { Loader2, User, Building, Mail, Phone, CalendarDays, Download, UserPlus } from "lucide-react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function WorkshopAdmin() {
   const [searchTerm, setSearchTerm] = React.useState("");
+  const [isAddOpen, setIsAddOpen] = React.useState(false);
+  const [newReg, setNewReg] = React.useState({ full_name: "", email: "", phone: "", company: "", workshop_name: "" });
+  const queryClient = useQueryClient();
 
   const { data: registrations, isLoading, isError, error } = useQuery({
     queryKey: ["workshop-registrations"],
@@ -28,6 +33,14 @@ export default function WorkshopAdmin() {
       return matchName || matchEmail || matchCompany;
     });
   }, [registrations, searchTerm]);
+
+  const handleAddReg = async (e) => {
+    e.preventDefault();
+    await localLeadStorage.addWorkshopRegistration(newReg);
+    queryClient.invalidateQueries({ queryKey: ["workshop-registrations"] });
+    setNewReg({ full_name: "", email: "", phone: "", company: "", workshop_name: "" });
+    setIsAddOpen(false);
+  };
 
   if (isLoading) {
     return (
@@ -69,6 +82,42 @@ export default function WorkshopAdmin() {
                 />
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
               </div>
+              <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
+                <DialogTrigger asChild>
+                  <Button className="bg-red-600 hover:bg-red-700 text-white">
+                    <UserPlus className="w-4 h-4 mr-2" />
+                    Add Registration
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-slate-900 border-slate-700">
+                  <DialogHeader>
+                    <DialogTitle className="text-slate-200">Add Workshop Registration</DialogTitle>
+                  </DialogHeader>
+                  <form onSubmit={handleAddReg} className="space-y-4 py-2">
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">Full Name</Label>
+                      <Input required value={newReg.full_name} onChange={(e) => setNewReg(p => ({ ...p, full_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">Email</Label>
+                      <Input required type="email" value={newReg.email} onChange={(e) => setNewReg(p => ({ ...p, email: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">Phone</Label>
+                      <Input value={newReg.phone} onChange={(e) => setNewReg(p => ({ ...p, phone: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">Company</Label>
+                      <Input value={newReg.company} onChange={(e) => setNewReg(p => ({ ...p, company: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300">Workshop Name</Label>
+                      <Input value={newReg.workshop_name} onChange={(e) => setNewReg(p => ({ ...p, workshop_name: e.target.value }))} className="bg-slate-800 border-slate-700 text-slate-200" />
+                    </div>
+                    <Button type="submit" className="w-full fire-button text-white">Add Registration</Button>
+                  </form>
+                </DialogContent>
+              </Dialog>
               <Button
                 onClick={() => localLeadStorage.exportToCSV(filteredRegistrations, 'workshop_registrations')}
                 className="bg-green-600 hover:bg-green-700 text-white"
