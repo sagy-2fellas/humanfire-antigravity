@@ -288,6 +288,21 @@ export default function Layout({ children, currentPageName }) {
                         Write New Post
                       </Link>
                     </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to={createPageUrl("ContactAdmin")} className="w-full hover:bg-[#B82E2B]/10 text-[#12103F] transition-colors font-body">
+                        Contact Leads
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to={createPageUrl("NewsletterAdmin")} className="w-full hover:bg-[#B82E2B]/10 text-[#12103F] transition-colors font-body">
+                        Newsletter Subscribers
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to={createPageUrl("WorkshopAdmin")} className="w-full hover:bg-[#B82E2B]/10 text-[#12103F] transition-colors font-body">
+                        Workshop Registrations
+                      </Link>
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               }
@@ -387,6 +402,27 @@ export default function Layout({ children, currentPageName }) {
                   className="block text-[#12103F]/80 hover:text-[#B82E2B] text-sm transition-colors font-body">
 
                     Write New Post
+                  </Link>
+                  <Link
+                  to={createPageUrl("ContactAdmin")}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block text-[#12103F]/80 hover:text-[#B82E2B] text-sm transition-colors font-body">
+
+                    Contact Leads
+                  </Link>
+                  <Link
+                  to={createPageUrl("NewsletterAdmin")}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block text-[#12103F]/80 hover:text-[#B82E2B] text-sm transition-colors font-body">
+
+                    Newsletter Subscribers
+                  </Link>
+                  <Link
+                  to={createPageUrl("WorkshopAdmin")}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block text-[#12103F]/80 hover:text-[#B82E2B] text-sm transition-colors font-body">
+
+                    Workshop Registrations
                   </Link>
                 </div>
               </div>
