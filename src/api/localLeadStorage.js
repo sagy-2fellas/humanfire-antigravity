@@ -106,12 +106,12 @@ export const localLeadStorage = {
     try {
       const data = localStorage.getItem(POPUP_SETTINGS_KEY);
       return data ? JSON.parse(data) : {
-        active: false,
-        title: "",
-        subtitle: "",
-        description: "",
-        redirect_url: "",
-        end_date: "",
+        active: true,
+        title: "Join Our Workshop",
+        subtitle: "Humanfire - Talent on the move",
+        description: "Edition #1: The Brand Issue - Creating Lasting Brand Experiences for Talent | 22-23 July 2026",
+        redirect_url: "https://www.quicket.co.za/events/359945-humanfire-talent-on-the-move-edition1-the-brand-issue-creating-lasting-brand-ex/?utm_source=EventPage&utm_medium=Sharebox&utm_campaign=&ref=event-page-share#/",
+        end_date: "2026-07-23",
         delay_seconds: 3,
       };
     } catch (e) {

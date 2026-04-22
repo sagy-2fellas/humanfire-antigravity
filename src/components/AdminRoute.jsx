@@ -8,6 +8,22 @@ export default function AdminRoute({ children }) {
   const [isAuthed, setIsAuthed] = useState(false);
 
   useEffect(() => {
+    const isDev = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    if (isDev) {
+      // Auto-login as admin on localhost
+      const sessionKey = "hf_admin_session";
+      if (!localStorage.getItem(sessionKey)) {
+        localStorage.setItem(sessionKey, JSON.stringify({
+          email: "sagy.shein@gmail.com",
+          full_name: "Humanfire Admin",
+          role: "admin",
+          loggedInAt: new Date().toISOString()
+        }));
+      }
+      setIsAuthed(true);
+      setIsChecking(false);
+      return;
+    }
     localAuth.isAuthenticated().then((authed) => {
       setIsAuthed(authed);
       setIsChecking(false);
