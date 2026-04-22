@@ -4,6 +4,7 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const NEWSLETTER_KEY = "hf_newsletter_subs";
 const CONTACT_KEY = "hf_contact_leads";
 const WORKSHOP_KEY = "hf_workshop_registrations";
+const POPUP_SETTINGS_KEY = "hf_popup_settings";
 
 const getSavedData = (key) => {
   try {
@@ -98,6 +99,30 @@ export const localLeadStorage = {
     regs.push(newReg);
     saveData(WORKSHOP_KEY, regs);
     return newReg;
+  },
+
+  // Popup Settings Methods
+  getPopupSettings: () => {
+    try {
+      const data = localStorage.getItem(POPUP_SETTINGS_KEY);
+      return data ? JSON.parse(data) : {
+        active: false,
+        title: "",
+        subtitle: "",
+        description: "",
+        redirect_url: "",
+        end_date: "",
+        delay_seconds: 3,
+      };
+    } catch (e) {
+      return { active: false };
+    }
+  },
+
+  savePopupSettings: async (settings) => {
+    await delay(300);
+    saveData(POPUP_SETTINGS_KEY, settings);
+    return settings;
   },
 
   // Generic CSV Export Utility

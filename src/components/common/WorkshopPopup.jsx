@@ -16,6 +16,8 @@ export default function WorkshopPopup({ isOpen, onClose }) {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
 
+  const settings = React.useMemo(() => localLeadStorage.getPopupSettings(), [isOpen]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -26,7 +28,9 @@ export default function WorkshopPopup({ isOpen, onClose }) {
         full_name: fullName,
         phone,
         company,
-        workshop_name: "Humanfire - Talent on the move - Edition#1 The Brand Issue (Creating Lasting Brand Experiences for Talent)"
+        workshop_name: [settings.title, settings.subtitle, settings.description]
+          .filter(Boolean)
+          .join(" - ")
       };
 
       await localLeadStorage.addWorkshopRegistration(workshopData);
@@ -39,10 +43,21 @@ export default function WorkshopPopup({ isOpen, onClose }) {
       }, 'epUIa8edYGpJPViy9').catch(() => {});
 
       setIsSuccess(true);
-      
-      setTimeout(() => {
-        window.location.href = "https://www.quicket.co.za/events/359945-humanfire-talent-on-the-move-edition1-the-brand-issue-creating-lasting-brand-ex/?utm_source=EventPage&utm_medium=Sharebox&utm_campaign=&ref=event-page-share#/";
-      }, 1500);
+
+      if (settings.redirect_url) {
+        setTimeout(() => {
+          window.location.href = settings.redirect_url;
+        }, 1500);
+      } else {
+        setTimeout(() => {
+          onClose();
+          setIsSuccess(false);
+          setEmail("");
+          setFullName("");
+          setPhone("");
+          setCompany("");
+        }, 2000);
+      }
     } catch (error) {
       console.error("Failed to register:", error);
       setIsSubmitting(false);
@@ -60,23 +75,31 @@ export default function WorkshopPopup({ isOpen, onClose }) {
           >
             <CheckCircle2 className="w-16 h-16 text-green-500 mb-4" />
             <h3 className="text-2xl font-bold text-white mb-2">You're Registered!</h3>
-            <p className="text-slate-400">Redirecting to registration page...</p>
+            <p className="text-slate-400">
+              {settings.redirect_url
+                ? "Redirecting to registration page..."
+                : "Thank you for signing up!"}
+            </p>
           </motion.div>
         ) : (
           <>
             <DialogHeader>
               <DialogTitle className="text-2xl font-bold text-white">
-                Join Our Workshop
+                {settings.title || "Join Our Event"}
                 <span className="inline-block w-2 h-2 bg-red-600 rounded-full ml-2 ember-pulse"></span>
               </DialogTitle>
               <DialogDescription className="text-slate-300 text-base mt-3">
-                <strong>Humanfire - Talent on the move</strong>
-                <br />
-                <span className="text-slate-400">Edition #1: The Brand Issue</span>
-                <br />
-                <span className="text-sm text-slate-500 mt-2 block">
-                  Creating Lasting Brand Experiences for Talent
-                </span>
+                {settings.subtitle && (
+                  <>
+                    <strong>{settings.subtitle}</strong>
+                    <br />
+                  </>
+                )}
+                {settings.description && (
+                  <span className="text-sm text-slate-500 mt-2 block">
+                    {settings.description}
+                  </span>
+                )}
               </DialogDescription>
             </DialogHeader>
 
@@ -141,7 +164,7 @@ export default function WorkshopPopup({ isOpen, onClose }) {
                     Registering...
                   </>
                 ) : (
-                  "Register for Workshop"
+                  "Register for Event"
                 )}
               </Button>
             </form>

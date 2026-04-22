@@ -13,21 +13,24 @@ import PrinciplesSectionHorizontalScroll from "../components/about/PrinciplesSec
 import NewsletterSignup from "../components/common/NewsletterSignup";
 import WorkshopPopup from "../components/common/WorkshopPopup";
 import SEO from "../components/common/SEO";
+import { localLeadStorage } from "@/api/localLeadStorage";
 
 export default function Home() {
   const [isWorkshopPopupOpen, setIsWorkshopPopupOpen] = React.useState(false);
 
   React.useEffect(() => {
-    const workshopEndDate = new Date('2026-03-25');
-    const currentDate = new Date();
-    
-    if (currentDate < workshopEndDate) {
-      const timer = setTimeout(() => {
-        setIsWorkshopPopupOpen(true);
-      }, 3000);
+    const popupSettings = localLeadStorage.getPopupSettings();
+    if (!popupSettings.active) return;
 
-      return () => clearTimeout(timer);
-    }
+    const isExpired = popupSettings.end_date && new Date(popupSettings.end_date) < new Date();
+    if (isExpired) return;
+
+    const delaySec = (popupSettings.delay_seconds ?? 3) * 1000;
+    const timer = setTimeout(() => {
+      setIsWorkshopPopupOpen(true);
+    }, delaySec);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const teamMembers = [

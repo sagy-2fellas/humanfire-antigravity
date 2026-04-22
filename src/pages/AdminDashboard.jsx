@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, FileText, Users, Mail, Settings, CalendarDays } from "lucide-react";
+import { BookOpen, FileText, Users, Mail, Settings, CalendarDays, Megaphone } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
@@ -35,6 +35,13 @@ export default function AdminDashboard() {
       icon: CalendarDays,
       link: createPageUrl("WorkshopAdmin"),
       color: "bg-orange-600"
+    },
+    {
+      title: "Event Popup",
+      description: "Toggle and configure the homepage event popup",
+      icon: Megaphone,
+      link: createPageUrl("PopupAdmin"),
+      color: "bg-purple-600"
     },
   ];
 

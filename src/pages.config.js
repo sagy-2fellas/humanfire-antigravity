@@ -65,6 +65,7 @@ import HumanDesign from './pages/HumanDesign';
 import HumanDesignCopy2 from './pages/HumanDesignCopy2';
 import HumanInsight from './pages/HumanInsight';
 import NewsletterAdmin from './pages/NewsletterAdmin';
+import PopupAdmin from './pages/PopupAdmin';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import ResetPassword from './pages/ResetPassword';
 import Services from './pages/Services';
@@ -93,6 +94,7 @@ export const PAGES = {
     "HumanDesignCopy2": HumanDesignCopy2,
     "HumanInsight": HumanInsight,
     "NewsletterAdmin": NewsletterAdmin,
+    "PopupAdmin": PopupAdmin,
     "PrivacyPolicy": PrivacyPolicy,
     "ResetPassword": ResetPassword,
     "Services": Services,

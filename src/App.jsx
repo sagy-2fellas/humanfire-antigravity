@@ -10,7 +10,7 @@ import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import AdminRoute from '@/components/AdminRoute';
 import { HelmetProvider } from 'react-helmet-async';
 
-const ADMIN_PAGES = ['AdminDashboard', 'BlogAdmin', 'BlogEditor', 'ContactAdmin', 'NewsletterAdmin', 'WorkshopAdmin', 'UserManagement'];
+const ADMIN_PAGES = ['AdminDashboard', 'BlogAdmin', 'BlogEditor', 'ContactAdmin', 'NewsletterAdmin', 'WorkshopAdmin', 'PopupAdmin', 'UserManagement'];
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
