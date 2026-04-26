@@ -604,7 +604,7 @@ export default function Layout({ children, currentPageName }) {
               Humanfire is a Level 1 BBBEE Contributor
             </p>
             <p className="text-slate-600 mt-2">
-              Built with <span className="text-red-500">&#9829;</span> by{' '}
+              Designed with <span className="text-red-500">&#9829;</span> by{' '}
               <a href="https://2fellasmedia.com" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent-red)] transition-colors">
                 2fellasmedia
               </a>
