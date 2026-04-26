@@ -603,6 +603,12 @@ export default function Layout({ children, currentPageName }) {
             <p className="text-slate-500">
               Humanfire is a Level 1 BBBEE Contributor
             </p>
+            <p className="text-slate-600 mt-2">
+              Built with <span className="text-red-500">&#9829;</span> by{' '}
+              <a href="https://2fellasmedia.com" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent-red)] transition-colors">
+                2fellasmedia
+              </a>
+            </p>
           </motion.div>
         </div>
       </footer>
